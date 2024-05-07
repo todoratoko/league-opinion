@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="matchups")
-public class Matchup {
+public class Match {
    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

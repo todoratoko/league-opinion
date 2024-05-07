@@ -12,16 +12,16 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class User {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-@Column
+    @Column
     private String username;
-@Column
+    @Column
     private String password;
-@Column
-private String profileImageUrl;
-@Column
-private String email;
+    @Column
+    private String profileImageUrl;
+    @Column
+    private String email;
 
 }

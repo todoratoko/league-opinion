@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.entities.Opinion;
-import com.example.demo.services.OpinionService;
+import com.example.demo.model.entities.Match;
+import com.example.demo.services.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,19 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class OpinionController extends BaseController{
-
+public class MatchController {
     @Autowired
-    private OpinionService opinionService;
-
+    MatchService matchService;
 
     @GetMapping("/opinions/{id}")
-    public ResponseEntity<Opinion> getById(@PathVariable int id) {
-        Opinion opinion = opinionService.getById(id);
-        return ResponseEntity.ok(opinion);
+    public ResponseEntity<Match> getById(@PathVariable int id) {
+        Match match = matchService.getById(id);
+        return ResponseEntity.ok(match);
     }
-
-
-
-
 }
