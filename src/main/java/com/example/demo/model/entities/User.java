@@ -1,6 +1,5 @@
 package com.example.demo.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,14 +13,17 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     @Column
     private String username;
     @Column
     private String password;
-    @Column
-    private String profileImageUrl;
+    @Column//(name = "profile_image_url")
+    private String image;
     @Column
     private String email;
+    @OneToMany(mappedBy = "owner")
+    private Set<Opinion> opinions;
+
 
 }

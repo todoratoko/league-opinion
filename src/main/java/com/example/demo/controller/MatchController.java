@@ -13,7 +13,7 @@ public class MatchController {
     @Autowired
     MatchService matchService;
 
-    @GetMapping("/opinions/{id}")
+    @GetMapping("/match/{id}")
     public ResponseEntity<Match> getById(@PathVariable int id) {
         Match match = matchService.getById(id);
         return ResponseEntity.ok(match);

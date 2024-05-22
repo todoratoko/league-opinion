@@ -3,12 +3,13 @@ package com.example.demo.services;
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
+import com.example.demo.model.dto.RegisterUserDTO;
+import com.example.demo.model.dto.EditUserDTO;
 import com.example.demo.model.dto.UserResponseDTO;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.UserRepository;
-import jakarta.servlet.http.HttpSession;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,69 +21,108 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public User login(String username, String password){
-        if(username == null || username.isBlank()){
+    public UserResponseDTO login(User user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        if (username == null || username.isBlank()) {
             throw new BadRequestException("User name is mandatory");
         }
-        if(password == null || password.isBlank()){
+        if (password == null || password.isBlank()) {
             throw new BadRequestException("Password field is mandatory");
         }
         User u = userRepository.findByUsernameAndPassword(username, password);
-        if(u == null){
+        if (u == null) {
             throw new UnauthorizedException("Wrong  credentials");
         }
-        return u;
+        UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
+        return dto;
     }
 
-    public User register(String username, String password, String confirmPassword){
-        if(username == null || username.isBlank()){
-            throw new BadRequestException("User name is mandatory");
+    public UserResponseDTO register(RegisterUserDTO user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String confirmPassword = user.getConfirmPassword();
+        if (!password.equals(confirmPassword)) {
+            throw new NotFoundException("Passwords do not match");
         }
-        if(username.length() <= 5){
-            throw new BadRequestException("Username is too short, must be at least 6 symbols");
-        }
-        if(password == null || password.isBlank()){
-            throw new BadRequestException("Password field is mandatory");
-        }
-        if(userRepository.findByUsername(username) != null){
-            throw new BadRequestException("User already exists");
-        }
-        if(!password.matches("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$")){
-            throw new BadRequestException("Password field requires other symbols");
-        }
-        if(!password.equals(confirmPassword)){
-            throw new BadRequestException("Passwords mismatch");
-        }
+        validateUsername(username);
+        validatePassword(password);
         User u = new User();
         u.setUsername(username);
         u.setPassword(password);
         userRepository.save(u);
-        return u;
+        UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
+        return dto;
+    }
+
+    private void validateUsername(String username) {
+        if (username == null || username.isBlank()) {
+            throw new BadRequestException("User name is mandatory");
+        }
+        if (username.length() <= 5) {
+            throw new BadRequestException("Username is too short, must be at least 6 symbols");
+        }
+        if (userRepository.findByUsername(username) != null) {
+            throw new BadRequestException("User already exists");
+        }
+    }
+
+    private void validatePassword(String password) {
+        if (password == null || password.isBlank()) {
+            throw new BadRequestException("Password field is mandatory");
+        }
+        if (!password.matches("^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$")) {
+            throw new BadRequestException("Password field requires other symbols");
+        }
     }
 
 
-    public User getById(long id) {
+    public UserResponseDTO getById(Integer id) {
         Optional<User> opt = userRepository.findById(id);
-        if(opt.isPresent()){
-            return opt.get();
-        }
-        else{
+        if (opt.isPresent()) {
+            UserResponseDTO dto = modelMapper.map(opt, UserResponseDTO.class);
+            return dto;
+        } else {
             throw new NotFoundException("User not found");
         }
     }
 
-    public User edit(User user) {
-        Optional<User> opt = userRepository.findById(user.getId());
-        if(opt.isPresent()){
-            userRepository.save(user);
-            //delete all opinions
-            return user;
+    public UserResponseDTO edit(EditUserDTO user, long id) {
+        if (user.getNewPassword() != null && user.getConfirmNewPassword() != null) {
+            validatePassword(user.getNewPassword());
+            if (!user.getNewPassword().equals(user.getConfirmNewPassword())) {
+                throw new NotFoundException("New password does not match");
+            }
         }
-        else{
+        if ((user.getNewPassword() == null && user.getConfirmNewPassword() != null) ||
+                (user.getNewPassword() != null && user.getConfirmNewPassword() == null)) {
+            throw new NotFoundException("New password does not match");
+        }
+        Optional<User> opt = userRepository.findById((int) id);
+        User newUser = modelMapper.map(opt, User.class);
+        if (!newUser.getPassword().equals(user.getPassword())) {
+            throw new NotFoundException("Old password is wrong!");
+        }
+        if (user.getNewPassword() != null) {
+            newUser.setPassword(user.getNewPassword());
+        }
+        if (user.getEmail() != null) {
+            newUser.setEmail(user.getEmail());
+        }
+        if (user.getProfileImageUrl() != null) {
+            newUser.setProfileImageUrl(user.getProfileImageUrl());
+        }
+        if (opt.isPresent()) {
+            userRepository.save(newUser);
+            UserResponseDTO dto = modelMapper.map(newUser, UserResponseDTO.class);
+            return dto;
+        } else {
             throw new NotFoundException("User not found");
         }
-
     }
 }
+
 

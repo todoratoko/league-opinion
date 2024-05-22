@@ -1,64 +1,55 @@
 package com.example.demo.controller;
 
-import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.RegisterUserDTO;
+import com.example.demo.model.dto.EditUserDTO;
 import com.example.demo.model.dto.UserResponseDTO;
 import com.example.demo.model.entities.User;
-import com.example.demo.model.repositories.UserRepository;
 import com.example.demo.services.UserService;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController extends BaseController {
     public static final String LOGGED = "logged";
+    public static final String USER_ID = "user_id";
     @Autowired
     private UserService userService;
-    @Autowired
-    private ModelMapper modelMapper;
+
+
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponseDTO> login(@RequestBody User user, HttpSession session) {
-        String username = user.getUsername();
-        String password = user.getPassword();
-        User u = userService.login(username, password);
-        UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
+    public UserResponseDTO login(@RequestBody User user, HttpSession session) {
+        UserResponseDTO u = userService.login(user);
         session.setAttribute(LOGGED, true);
-        return ResponseEntity.ok(dto);
+        session.setAttribute(USER_ID, u.getId());
+        return u;
     }
 
     @PostMapping("/reg")
-    public ResponseEntity<UserResponseDTO> register(@RequestBody RegisterUserDTO user) {
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String confirmPassword = user.getConfirmPassword();
+    public UserResponseDTO register(@RequestBody RegisterUserDTO user) {
         //TODO direct login when register. Or login when confirming trough Mail.
-        User u = userService.register(username, password, confirmPassword);
-        UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
-        return ResponseEntity.ok(dto);
+        UserResponseDTO u = userService.register(user);
+        return u;
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserResponseDTO> getById(@PathVariable int id, HttpSession session) {
-        User u = userService.getById(id);
-        UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
-        return ResponseEntity.ok(dto);
+    public UserResponseDTO getById(@PathVariable int id) {
+        return userService.getById(id);
     }
 
-    @PutMapping("/users")
-    public ResponseEntity<UserResponseDTO> register(@RequestBody User user, HttpSession session) {
+    @PutMapping("/users/edit/{id}")
+    public UserResponseDTO edit(@RequestBody EditUserDTO user, @PathVariable long id, HttpSession session) {
         validateLogin(session);
-        String username = user.getUsername();
-        String password = user.getPassword();
-        //TODO direct login when register. Or login when confirming trough Mail.
-        User u = userService.edit(user);
-        UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
-        return ResponseEntity.ok(dto);
+        UserResponseDTO u = userService.edit(user, id);
+        return u;
+    }
+
+    @PostMapping("/logout")
+    public void logOut(HttpSession session){
+        session.invalidate();
     }
 
     private void validateLogin(HttpSession session) {
@@ -66,6 +57,5 @@ public class UserController extends BaseController {
             throw new UnauthorizedException("You have to log in!");
         }
     }
-
 
 }
