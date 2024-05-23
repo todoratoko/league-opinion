@@ -61,5 +61,5 @@ public class UserController extends BaseController {
             throw new UnauthorizedException("You have to log in!");
         }
     }
-    
+
 }

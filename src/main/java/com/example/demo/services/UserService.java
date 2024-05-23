@@ -42,20 +42,25 @@ public class UserService {
     }
 
     public UserResponseDTO register(RegisterUserDTO user) {
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String confirmPassword = user.getConfirmPassword();
-        if (!password.equals(confirmPassword)) {
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
             throw new NotFoundException("Passwords do not match");
         }
-        validateUsername(username);
-        validatePassword(password);
-        User u = new User();
-        u.setUsername(username);
-        u.setPassword(password);
+        if (!user.getEmail().equals(user.getConfirmEmail())) {
+            throw new NotFoundException("Emails do not match");
+        }
+        validateUsername(user.getUsername());
+        validatePassword(user.getPassword());
+        validateEmail(user.getEmail());
+        User u = modelMapper.map(user, User.class);
         userRepository.save(u);
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
         return dto;
+    }
+
+    private void validateEmail(String email) {
+        if (userRepository.findByEmail(email) != null) {
+            throw new BadRequestException("Email is taken");
+        }
     }
 
     private void validateUsername(String username) {

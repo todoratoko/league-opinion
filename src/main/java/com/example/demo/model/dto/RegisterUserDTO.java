@@ -11,4 +11,6 @@ public class RegisterUserDTO {
     private String username;
     private String password;
     private String confirmPassword;
+    private String email;
+    private String confirmEmail;
 }
