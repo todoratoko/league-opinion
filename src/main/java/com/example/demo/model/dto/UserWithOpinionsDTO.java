@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class UserWithOpinionsDTO {
-    private int id;
+    private long id;
     private String username;
-    private String profileImageUrl;
+    private String image;
     private List<OpinionWithoutOwnerDTO> opinionList;
 }

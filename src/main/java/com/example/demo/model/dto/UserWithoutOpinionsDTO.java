@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserWithoutOpinionsDTO {
 
-    private int id;
+    private long id;
     private String username;
-    private String profileImageUrl;
+    private String image;
 }

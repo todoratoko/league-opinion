@@ -5,6 +5,7 @@ import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.AddOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.model.entities.Opinion;
+import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.OpinionRepository;
 import com.example.demo.model.repositories.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -36,13 +37,14 @@ public class OpinionService {
     }
 
     public OpinionWithOwnerDTO addOpinion(AddOpinionDTO opinion, Integer id) {
-        if(id == null){
-            throw new UnauthorizedException("Please login");
-        }
+//        if(id == null){
+//            throw new UnauthorizedException("Please login");
+//        }  may be useless to check
+        User ownerUser = userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new NotFoundException("Owner not found"));
         Opinion opinionSave = modelMapper.map(opinion, Opinion.class);
-        opinionSave.setOwner(userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new NotFoundException("Owner not found")));
+        opinionSave.setOwner(ownerUser);
         opinionRepository.save(opinionSave);
-        OpinionWithOwnerDTO opinionWithOwnerDTO = modelMapper.map(opinion, OpinionWithOwnerDTO.class);
+        OpinionWithOwnerDTO opinionWithOwnerDTO = modelMapper.map(opinionSave, OpinionWithOwnerDTO.class);
         return opinionWithOwnerDTO;
     }
 

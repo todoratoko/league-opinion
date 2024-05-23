@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 public class OpinionWithoutOwnerDTO {
-    private Integer id;
+    private long id;
     private Date created_at;
     private int team_one_percent;
     private int team_two_percent;
