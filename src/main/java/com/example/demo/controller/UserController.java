@@ -7,8 +7,7 @@ import com.example.demo.model.dto.UserResponseDTO;
 import com.example.demo.model.entities.User;
 import com.example.demo.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;;
-import org.modelmapper.ModelMapper;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,6 @@ public class UserController extends BaseController {
     public static final String LOGGED_FROM = "logged_from";
     @Autowired
     private UserService userService;
-
 
 
     @PostMapping("/login")
@@ -51,16 +49,17 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/logout")
-    public void logOut(HttpSession session){
+    public void logOut(HttpSession session) {
         session.invalidate();
     }
 
     private void validateLogin(HttpSession session, HttpServletRequest request) {
-        if(session.isNew()||
-                !(Boolean)session.getAttribute(LOGGED)||
-                (!request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM)))){
+        boolean newSession = session.isNew();
+        boolean logged = session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED));
+        boolean sameIp = request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM));
+        if (newSession || !logged || !sameIp) {
             throw new UnauthorizedException("You have to log in!");
         }
     }
-
+    
 }

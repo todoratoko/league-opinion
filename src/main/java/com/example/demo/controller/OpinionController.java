@@ -3,12 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.AddOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
-import com.example.demo.model.entities.Opinion;
 import com.example.demo.services.OpinionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,9 +38,10 @@ public class OpinionController extends BaseController{
 
 
     private void validateLogin(HttpSession session, HttpServletRequest request) {
-        if(session.isNew()||
-                !(Boolean)session.getAttribute(LOGGED)||
-                (!request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM)))){
+        boolean newSession = session.isNew();
+        boolean logged = session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED));
+        boolean sameIp = request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM));
+        if (newSession || !logged || !sameIp) {
             throw new UnauthorizedException("You have to log in!");
         }
     }
