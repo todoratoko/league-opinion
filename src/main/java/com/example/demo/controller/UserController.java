@@ -6,6 +6,7 @@ import com.example.demo.model.dto.EditUserDTO;
 import com.example.demo.model.dto.UserResponseDTO;
 import com.example.demo.model.entities.User;
 import com.example.demo.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController {
     public static final String LOGGED = "logged";
     public static final String USER_ID = "user_id";
+    public static final String LOGGED_FROM = "logged_from";
     @Autowired
     private UserService userService;
 
 
 
     @PostMapping("/login")
-    public UserResponseDTO login(@RequestBody User user, HttpSession session) {
+    public UserResponseDTO login(@RequestBody User user, HttpSession session, HttpServletRequest request) {
         UserResponseDTO u = userService.login(user);
         session.setAttribute(LOGGED, true);
         session.setAttribute(USER_ID, u.getId());
+        session.setAttribute(LOGGED_FROM, request.getRemoteAddr());
         return u;
     }
 
@@ -41,8 +44,8 @@ public class UserController extends BaseController {
     }
 
     @PutMapping("/users/edit/{id}")
-    public UserResponseDTO edit(@RequestBody EditUserDTO user, @PathVariable long id, HttpSession session) {
-        validateLogin(session);
+    public UserResponseDTO edit(@RequestBody EditUserDTO user, @PathVariable long id, HttpSession session, HttpServletRequest request) {
+        validateLogin(session, request);
         UserResponseDTO u = userService.edit(user, id);
         return u;
     }
@@ -52,8 +55,10 @@ public class UserController extends BaseController {
         session.invalidate();
     }
 
-    private void validateLogin(HttpSession session) {
-        if(session.isNew()|| !(Boolean)session.getAttribute(LOGGED)){
+    private void validateLogin(HttpSession session, HttpServletRequest request) {
+        if(session.isNew()||
+                !(Boolean)session.getAttribute(LOGGED)||
+                (!request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM)))){
             throw new UnauthorizedException("You have to log in!");
         }
     }

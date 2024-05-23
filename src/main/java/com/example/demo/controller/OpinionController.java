@@ -5,6 +5,7 @@ import com.example.demo.model.dto.AddOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.services.OpinionService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 public class OpinionController extends BaseController{
 
     public static final String LOGGED = "logged";
+    public static final String LOGGED_FROM = "logged_from";
     @Autowired
     private OpinionService opinionService;
 
@@ -29,16 +31,18 @@ public class OpinionController extends BaseController{
         return dto;
     }
     @PostMapping("/opinions")
-    public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, HttpSession session){
-        validateLogin(session);
+    public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, HttpSession session, HttpServletRequest request){
+        validateLogin(session, request);
         return opinionService.addOpinion(opinion, (Integer) session.getAttribute(UserController.USER_ID));
     }
 
 
 
 
-    private void validateLogin(HttpSession session) {
-        if(session.isNew()|| !(Boolean)session.getAttribute(LOGGED)){
+    private void validateLogin(HttpSession session, HttpServletRequest request) {
+        if(session.isNew()||
+                !(Boolean)session.getAttribute(LOGGED)||
+                (!request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM)))){
             throw new UnauthorizedException("You have to log in!");
         }
     }
