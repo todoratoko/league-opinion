@@ -40,7 +40,7 @@ public class OpinionService {
             throw new UnauthorizedException("Please login");
         }
         Opinion opinionSave = modelMapper.map(opinion, Opinion.class);
-        opinionSave.setOwner(userRepository.findById(id).orElseThrow(() -> new NotFoundException("Owner not found")));
+        opinionSave.setOwner(userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new NotFoundException("Owner not found")));
         opinionRepository.save(opinionSave);
         OpinionWithOwnerDTO opinionWithOwnerDTO = modelMapper.map(opinion, OpinionWithOwnerDTO.class);
         return opinionWithOwnerDTO;

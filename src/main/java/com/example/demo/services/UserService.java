@@ -80,7 +80,7 @@ public class UserService {
     }
 
 
-    public UserResponseDTO getById(Integer id) {
+    public UserResponseDTO getById(long id) {
         Optional<User> opt = userRepository.findById(id);
         if (opt.isPresent()) {
             UserResponseDTO dto = modelMapper.map(opt, UserResponseDTO.class);
@@ -101,7 +101,7 @@ public class UserService {
                 (user.getNewPassword() != null && user.getConfirmNewPassword() == null)) {
             throw new NotFoundException("New password does not match");
         }
-        Optional<User> opt = userRepository.findById((int) id);
+        Optional<User> opt = userRepository.findById(id);
         User newUser = modelMapper.map(opt, User.class);
         if (!newUser.getPassword().equals(user.getPassword())) {
             throw new NotFoundException("Old password is wrong!");
@@ -112,8 +112,8 @@ public class UserService {
         if (user.getEmail() != null) {
             newUser.setEmail(user.getEmail());
         }
-        if (user.getProfileImageUrl() != null) {
-            newUser.setProfileImageUrl(user.getProfileImageUrl());
+        if (user.getImage() != null) {
+            newUser.setImage(user.getImage());
         }
         if (opt.isPresent()) {
             userRepository.save(newUser);
