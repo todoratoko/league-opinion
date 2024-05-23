@@ -16,11 +16,11 @@ public class Opinion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private Date created_at;   //Java Date => mySQL datetime?
+    private Date createdAt;   //Java Date => mySQL datetime?
     @Column
-    private int team_one_percent;
+    private int teamOnePercent;
     @Column
-    private int team_two_percent;
+    private int teamTwoPercent;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;

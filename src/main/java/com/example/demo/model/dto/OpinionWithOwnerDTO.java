@@ -12,7 +12,7 @@ import java.util.Date;
 public class OpinionWithOwnerDTO {
     private long id;
     private Date created_at;
-    private int team_one_percent;
-    private int team_two_percent;
+    private int teamOnePercent;
+    private int teamTwoPercent;
     private UserWithoutOpinionsDTO owner;
 }
