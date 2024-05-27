@@ -7,6 +7,5 @@ import lombok.Data;
 public class AddOpinionDTO {
     private int teamOnePercent;
     private int teamTwoPercent;
-    private long ownerId;
 
 }

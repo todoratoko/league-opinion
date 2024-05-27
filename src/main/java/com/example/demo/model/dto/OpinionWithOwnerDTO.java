@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class OpinionWithOwnerDTO {
     private long id;
-    private Date created_at;
+    private Date createdAt;
     private int teamOnePercent;
     private int teamTwoPercent;
     private UserWithoutOpinionsDTO owner;

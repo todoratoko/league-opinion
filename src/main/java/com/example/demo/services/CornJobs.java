@@ -6,6 +6,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CornJobs {
 
+//        @Scheduled(fixedDelay = 1000*60)
+//    public static void checkInactiveUsers(){
+
+        //  select users that where login in before now-30 days
+        // iterate them
+        //send email to log back in
+    }
+
 //    @Scheduled(fixedDelay = 1000*60*60*24)
 //    public static void checkInactiveUsers(){
 //        //  select users that where login in before now-30 days
@@ -25,5 +33,5 @@ public class CornJobs {
     //check for inactivity
 
     //
-
-}
+//
+//}

@@ -11,5 +11,5 @@ public class UserWithoutOpinionsDTO {
 
     private long id;
     private String username;
-    private String image;
+    private String profileImage;
 }

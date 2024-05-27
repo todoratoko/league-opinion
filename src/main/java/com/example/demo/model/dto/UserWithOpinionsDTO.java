@@ -12,6 +12,6 @@ import java.util.List;
 public class UserWithOpinionsDTO {
     private long id;
     private String username;
-    private String image;
+    private String profileImage;
     private List<OpinionWithoutOwnerDTO> opinionList;
 }

@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exceptions.UnauthorizedException;
-import com.example.demo.model.dto.RegisterUserDTO;
-import com.example.demo.model.dto.EditUserDTO;
-import com.example.demo.model.dto.UserResponseDTO;
+import com.example.demo.model.dto.*;
 import com.example.demo.model.entities.User;
 import com.example.demo.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +35,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/users/{id}")
-    public UserResponseDTO getById(@PathVariable int id) {
+    public UserWithOpinionsDTO getById(@PathVariable int id) {
         return userService.getById(id);
     }
 

@@ -18,8 +18,8 @@ public class User {
     private String username;
     @Column
     private String password;
-    @Column//(name = "profile_image_url") not working with separate words
-    private String image;
+    @Column
+    private String profileImage;
     @Column
     private String email;
     @OneToMany(mappedBy = "owner")

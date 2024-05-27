@@ -3,9 +3,8 @@ package com.example.demo.services;
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
-import com.example.demo.model.dto.RegisterUserDTO;
-import com.example.demo.model.dto.EditUserDTO;
-import com.example.demo.model.dto.UserResponseDTO;
+import com.example.demo.model.dto.*;
+import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -14,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -85,10 +86,15 @@ public class UserService {
     }
 
 
-    public UserResponseDTO getById(long id) {
+    public UserWithOpinionsDTO getById(long id) {
         Optional<User> opt = userRepository.findById(id);
         if (opt.isPresent()) {
-            UserResponseDTO dto = modelMapper.map(opt, UserResponseDTO.class);
+            User u = opt.get();
+            UserWithOpinionsDTO dto = modelMapper.map(opt, UserWithOpinionsDTO.class);
+            Set<Opinion> opinions = u.getOpinions();
+            dto.setOpinionList(opinions.stream().
+                    map(opinion -> modelMapper.map(opinion, OpinionWithoutOwnerDTO.class)).
+                    collect(Collectors.toList()));
             return dto;
         } else {
             throw new NotFoundException("User not found");
@@ -117,8 +123,8 @@ public class UserService {
         if (user.getEmail() != null) {
             newUser.setEmail(user.getEmail());
         }
-        if (user.getImage() != null) {
-            newUser.setImage(user.getImage());
+        if (user.getProfileImage() != null) {
+            newUser.setProfileImage(user.getProfileImage());
         }
         if (opt.isPresent()) {
             userRepository.save(newUser);

@@ -11,5 +11,5 @@ public class EditUserDTO {
     private String newPassword;
     private String confirmNewPassword;
     private String email;
-    private String image;
+    private String profileImage;
 }
