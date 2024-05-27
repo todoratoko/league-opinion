@@ -34,8 +34,11 @@ public class UserService {
         if (password == null || password.isBlank()) {
             throw new BadRequestException("Password field is mandatory");
         }
-        User u = userRepository.findByUsernameAndPassword(username, password);
+        User u = userRepository.findByUsername(username);
         if (u == null) {
+            throw new UnauthorizedException("Wrong  credentials");
+        }
+        if(!passwordEncoder.matches(user.getPassword(), u.getPassword())){
             throw new UnauthorizedException("Wrong  credentials");
         }
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
@@ -51,6 +54,7 @@ public class UserService {
         }
         validateUsername(user.getUsername());
         validatePassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         validateEmail(user.getEmail());
         User u = modelMapper.map(user, User.class);
         userRepository.save(u);
