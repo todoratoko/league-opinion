@@ -31,7 +31,7 @@ public class OpinionController extends BaseController{
     @PostMapping("/opinions")
     public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, HttpSession session, HttpServletRequest request){
         validateLogin(session, request);
-        return opinionService.addOpinion(opinion, (Integer) session.getAttribute(UserController.USER_ID));
+        return opinionService.addOpinion(opinion, (Long) session.getAttribute(UserController.USER_ID));
     }
 
 

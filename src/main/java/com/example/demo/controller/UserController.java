@@ -60,4 +60,10 @@ public class UserController extends BaseController {
         }
     }
 
+    @PostMapping("/users/{id}/follow")
+    public UserResponseDTO followUser(@PathVariable long id, HttpSession session, HttpServletRequest request){
+        validateLogin(session, request);
+        return userService.followUser(id, (Long) session.getAttribute(USER_ID));
+    }
+
 }

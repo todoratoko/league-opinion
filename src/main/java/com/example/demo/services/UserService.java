@@ -38,7 +38,7 @@ public class UserService {
         if (u == null) {
             throw new UnauthorizedException("Wrong  credentials");
         }
-        if(!passwordEncoder.matches(user.getPassword(), u.getPassword())){
+        if (!passwordEncoder.matches(user.getPassword(), u.getPassword())) {
             throw new UnauthorizedException("Wrong  credentials");
         }
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
@@ -118,8 +118,8 @@ public class UserService {
         }
         Optional<User> opt = userRepository.findById(id);
         User newUser = modelMapper.map(opt, User.class);
-        if (!newUser.getPassword().equals(user.getPassword())) {
-            throw new NotFoundException("Old password is wrong!");
+        if (!passwordEncoder.matches(user.getPassword(), newUser.getPassword())) {
+            throw new UnauthorizedException("Wrong  credentials");
         }
         if (user.getNewPassword() != null) {
             newUser.setPassword(user.getNewPassword());
@@ -137,6 +137,21 @@ public class UserService {
         } else {
             throw new NotFoundException("User not found");
         }
+    }
+
+    public UserResponseDTO followUser(long followingId, long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+        User following = userRepository.findById(followingId).orElseThrow(() -> new NotFoundException("User not found"));
+        if (user.getFollowing().contains(following)) {
+            throw new NotFoundException("Already followed this user!");
+        }
+        if(followingId == userId){
+            throw new NotFoundException("Can not follow yourself!");
+        }
+        user.getFollowing().add(following);
+        userRepository.save(user);
+        UserResponseDTO dto = modelMapper.map(user, UserResponseDTO.class);
+        return dto;
     }
 }
 

@@ -36,7 +36,7 @@ public class OpinionService {
         }
     }
 
-    public OpinionWithOwnerDTO addOpinion(AddOpinionDTO opinion, Integer id) {
+    public OpinionWithOwnerDTO addOpinion(AddOpinionDTO opinion, Long id) {
 //        if(id == null){
 //            throw new UnauthorizedException("Please login");
 //        }  may be useless to check
