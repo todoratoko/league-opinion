@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.entities.Match;
+import com.example.demo.model.entities.Game;
 import com.example.demo.services.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +14,8 @@ public class MatchController {
     MatchService matchService;
 
     @GetMapping("/match/{id}")
-    public ResponseEntity<Match> getById(@PathVariable int id) {
-        Match match = matchService.getById(id);
-        return ResponseEntity.ok(match);
+    public ResponseEntity<Game> getById(@PathVariable int id) {
+        Game game = matchService.getById(id);
+        return ResponseEntity.ok(game);
     }
 }

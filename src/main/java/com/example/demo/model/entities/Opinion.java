@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -24,8 +23,10 @@ public class Opinion {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game game;
 
-   // ?? private Match match;
 
 
 

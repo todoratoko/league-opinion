@@ -3,14 +3,13 @@ package com.example.demo.model.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="matchups")
-public class Match {
+@Table(name="games")
+public class Game {
    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private String matchupStartDateTime; // ???
-
+    private String matchStartDateTime; // ???
     @Column
     private int teamOneId;
     @Column

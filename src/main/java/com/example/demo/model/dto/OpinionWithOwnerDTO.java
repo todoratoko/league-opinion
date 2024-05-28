@@ -14,5 +14,6 @@ public class OpinionWithOwnerDTO {
     private Date createdAt;
     private int teamOnePercent;
     private int teamTwoPercent;
+    private long gameId;
     private UserWithoutOpinionsDTO owner;
 }

@@ -28,10 +28,10 @@ public class OpinionController extends BaseController{
         OpinionWithOwnerDTO dto = opinionService.getById(id);
         return dto;
     }
-    @PostMapping("/opinions")
-    public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, HttpSession session, HttpServletRequest request){
+    @PostMapping("/match/opinions/{matchId}")
+    public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, @PathVariable long matchId, HttpSession session, HttpServletRequest request){
         validateLogin(session, request);
-        return opinionService.addOpinion(opinion, (Long) session.getAttribute(UserController.USER_ID));
+        return opinionService.addOpinion(opinion, matchId, (Long) session.getAttribute(UserController.USER_ID));
     }
 
 
