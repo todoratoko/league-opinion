@@ -145,10 +145,19 @@ public class UserService {
         if (user.getFollowing().contains(following)) {
             throw new NotFoundException("Already followed this user!");
         }
-        if(followingId == userId){
+        if (followingId == userId) {
             throw new NotFoundException("Can not follow yourself!");
         }
         user.getFollowing().add(following);
+        userRepository.save(user);
+        UserResponseDTO dto = modelMapper.map(user, UserResponseDTO.class);
+        return dto;
+    }
+
+    public UserResponseDTO unfollowUser(long followingId, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+        User following = userRepository.findById(followingId).orElseThrow(() -> new NotFoundException("User not found"));
+        user.getFollowing().remove(following);
         userRepository.save(user);
         UserResponseDTO dto = modelMapper.map(user, UserResponseDTO.class);
         return dto;

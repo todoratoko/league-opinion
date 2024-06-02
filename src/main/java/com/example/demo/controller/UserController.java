@@ -65,5 +65,10 @@ public class UserController extends BaseController {
         validateLogin(session, request);
         return userService.followUser(id, (Long) session.getAttribute(USER_ID));
     }
+    @PostMapping("/users/{id}/unfollow")
+    public UserResponseDTO unfollowUser(@PathVariable long id, HttpSession session, HttpServletRequest request){
+        validateLogin(session, request);
+        return userService.unfollowUser(id, (Long) session.getAttribute(USER_ID));
+    }
 
 }
