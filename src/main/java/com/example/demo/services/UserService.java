@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.controller.UserController;
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
@@ -7,11 +8,19 @@ import com.example.demo.model.dto.*;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import lombok.SneakyThrows;
+import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -105,7 +114,8 @@ public class UserService {
         }
     }
 
-    public UserResponseDTO edit(EditUserDTO user, long id) {
+    public UserResponseDTO edit(EditUserDTO user, long id, HttpServletRequest request) {
+        UserController.validateLogin(request);
         if (user.getNewPassword() != null && user.getConfirmNewPassword() != null) {
             validatePassword(user.getNewPassword());
             if (!user.getNewPassword().equals(user.getConfirmNewPassword())) {
@@ -139,9 +149,10 @@ public class UserService {
         }
     }
 
-    public UserResponseDTO followUser(long followingId, long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
-        User following = userRepository.findById(followingId).orElseThrow(() -> new NotFoundException("User not found"));
+    public UserResponseDTO followUser(long followingId, long userId, HttpServletRequest request) {
+        UserController.validateLogin(request);
+        User user = getUserById(userId);
+        User following = getUserById(followingId);
         if (user.getFollowing().contains(following)) {
             throw new NotFoundException("Already followed this user!");
         }
@@ -154,13 +165,38 @@ public class UserService {
         return dto;
     }
 
-    public UserResponseDTO unfollowUser(long followingId, Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
-        User following = userRepository.findById(followingId).orElseThrow(() -> new NotFoundException("User not found"));
+
+    public UserResponseDTO unfollowUser(long followingId, Long userId, HttpServletRequest request) {
+        UserController.validateLogin(request);
+        User user = getUserById(userId);
+        User following = getUserById(followingId);
+        if (!user.getFollowing().contains(following)) {
+            throw new NotFoundException("You have to follow the user, in order to unfollow!");
+        }
         user.getFollowing().remove(following);
         userRepository.save(user);
         UserResponseDTO dto = modelMapper.map(user, UserResponseDTO.class);
         return dto;
+    }
+
+    // iznesi go na chitavo mqsto
+    private User getUserById(long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+    }
+
+    @SneakyThrows
+    public String uploadFile(MultipartFile file, HttpServletRequest request) {
+        UserController.validateLogin(request);
+        long loggedUserId = (long) request.getSession().getAttribute(UserController.USER_ID);
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        String name = System.nanoTime() + "." + extension;
+        Files.copy(file.getInputStream(), new File("uploads" + File.separator + name).toPath());
+        User u = getUserById(loggedUserId);
+        u.setProfileImage(name);
+        userRepository.save(u);
+        return name;
+
+
     }
 }
 
