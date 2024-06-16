@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +28,8 @@ public class User {
     private String profileImage;
     @Column
     private String email;
+    @Column(name = "enabled")
+    private boolean isEnabled;
     @OneToMany(mappedBy = "owner")
     private Set<Opinion> opinions;
 
@@ -38,6 +42,5 @@ public class User {
 
     @ManyToMany(mappedBy = "following")
     private Set<User> followers;
-
 
 }

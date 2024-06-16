@@ -15,5 +15,7 @@ public class OpinionWithOwnerDTO {
     private int teamOnePercent;
     private int teamTwoPercent;
     private long gameId;
+    private String  opinion;
     private UserWithoutOpinionsDTO owner;
+
 }

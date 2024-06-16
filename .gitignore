@@ -35,3 +35,4 @@ build/
 
 ### VS Code ###  notsure if works but should bock the API's
 .env
+/main/resources/application.properties

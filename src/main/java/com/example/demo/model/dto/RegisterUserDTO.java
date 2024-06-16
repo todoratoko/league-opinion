@@ -13,4 +13,5 @@ public class RegisterUserDTO {
     private String confirmPassword;
     private String email;
     private String confirmEmail;
+    private boolean isEnabled = false;
 }

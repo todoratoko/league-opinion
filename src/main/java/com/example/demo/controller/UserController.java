@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,10 +41,16 @@ public class UserController extends BaseController {
 
     @PostMapping("/reg")
     public UserResponseDTO register(@RequestBody RegisterUserDTO user) {
-        //TODO direct login when register. Or login when confirming trough Mail.
         UserResponseDTO u = userService.register(user);
         return u;
     }
+
+    @GetMapping("/reg/confirm")
+    public ResponseEntity<String> confirmAccount(@RequestParam("token") String token) {
+        //TODO login when confirming trough Mail.
+        return userService.confirmToken(token);
+    }
+
 
     @GetMapping("/users/{id}")
     public UserWithOpinionsDTO getById(@PathVariable int id) {
@@ -84,7 +91,7 @@ public class UserController extends BaseController {
     @SneakyThrows
     @PostMapping("users/image")
     public String uploadProfileImage(@RequestParam(name = "file") MultipartFile file, HttpServletRequest request) {
-       return userService.uploadFile(file, request);
+        return userService.uploadFile(file, request);
     }
 
 }

@@ -7,20 +7,22 @@ import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.*;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
+import com.example.demo.model.repositories.ConfirmationRepository;
 import com.example.demo.model.repositories.UserRepository;
+import com.example.demo.model.entities.Confirmation;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,7 +32,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private ConfirmationRepository confirmationRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -67,6 +73,9 @@ public class UserService {
         validateEmail(user.getEmail());
         User u = modelMapper.map(user, User.class);
         userRepository.save(u);
+        Confirmation confirmation = new Confirmation(u);
+        confirmationRepository.save(confirmation);
+        emailService.sendEmailConfirmation(user.getEmail(),"Successful registration", "You have to confirm your registration: ", confirmation.getToken());
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
         return dto;
     }
@@ -75,6 +84,20 @@ public class UserService {
         if (userRepository.findByEmail(email) != null) {
             throw new BadRequestException("Email is taken");
         }
+    }
+    private boolean validateToken(String token) {
+        Confirmation confirmation = confirmationRepository.findByToken(token);
+        if(confirmation == null){
+            throw new NotFoundException("Token not found");
+        }
+        User user = userRepository.findByEmail(confirmation.getUser().getEmail());
+        if(user == null){
+            throw new NotFoundException("User not found to validate");
+        }
+        user.setEnabled(true);
+        userRepository.save(user);
+        confirmationRepository.delete(confirmation);
+        return true;
     }
 
     private void validateUsername(String username) {
@@ -195,6 +218,21 @@ public class UserService {
         u.setProfileImage(name);
         userRepository.save(u);
         return name;
+
+
+    }
+
+    public ResponseEntity<String> confirmToken(String token) {
+        Confirmation confirmationToken = confirmationRepository.findByToken(token);
+        if(confirmationToken != null){
+            User user = confirmationToken.getUser();
+            user.setEnabled(true);
+            userRepository.save(user);
+            confirmationRepository.delete(confirmationToken);
+            return ResponseEntity.ok("Account verified successfully!");
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid token.");
+        }
 
 
     }

@@ -14,4 +14,6 @@ public class OpinionWithoutOwnerDTO {
     private Date createdAt;
     private int teamOnePercent;
     private int teamTwoPercent;
+    private String  opinion;
+
 }

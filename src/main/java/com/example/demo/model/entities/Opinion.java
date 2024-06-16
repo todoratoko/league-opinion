@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,14 +21,15 @@ public class Opinion {
     private int teamOnePercent;
     @Column
     private int teamTwoPercent;
+    @Column
+    private String  comment;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
-
-
 
 
 }
