@@ -40,9 +40,9 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/reg")
-    public UserResponseDTO register(@RequestBody RegisterUserDTO user) {
+    public ResponseEntity<String> register(@RequestBody RegisterUserDTO user) {
         UserResponseDTO u = userService.register(user);
-        return u;
+        return ResponseEntity.ok("Check your email to confirm the registration");
     }
 
     @GetMapping("/reg/confirm")
@@ -51,6 +51,17 @@ public class UserController extends BaseController {
         return userService.confirmToken(token);
     }
 
+    @PostMapping("/forgotPassword")
+    public ResponseEntity<String> forgotPassword(@RequestBody RegisterUserDTO user) {
+        userService.passwordEmailSend(user);
+        return ResponseEntity.ok("Link to reset your password has been sent to your email");
+    }
+
+    @PostMapping("/forgotPassword/confirmation")
+    public ResponseEntity<String> forgotPasswordHandle(@RequestParam("token") String token, @RequestParam("newPassword") String newPassword, @RequestParam("confirmNewPassword") String confirmNewPassword) {
+        userService.passwordReset(token, newPassword, confirmNewPassword);
+        return ResponseEntity.ok("New password was set");
+    }
 
     @GetMapping("/users/{id}")
     public UserWithOpinionsDTO getById(@PathVariable int id) {

@@ -1,6 +1,5 @@
 package com.example.demo.model.entities;
 
-import com.example.demo.model.entities.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Table(name = "confirmations")
-public class Confirmation {
+public class ConfirmationToken {
     private static final int EXPIRATION = 60 * 24;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +36,10 @@ public class Confirmation {
         return new Date(cal.getTime().getTime());
     }
 
-    public Confirmation() {
+    public ConfirmationToken() {
     }
 
-    public Confirmation(User user) {
+    public ConfirmationToken(User user) {
         this.user = user;
         this.createdDate = LocalDateTime.now();
         this.token = UUID.randomUUID().toString();

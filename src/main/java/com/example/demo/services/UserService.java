@@ -9,7 +9,7 @@ import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.ConfirmationRepository;
 import com.example.demo.model.repositories.UserRepository;
-import com.example.demo.model.entities.Confirmation;
+import com.example.demo.model.entities.ConfirmationToken;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
@@ -73,9 +73,9 @@ public class UserService {
         validateEmail(user.getEmail());
         User u = modelMapper.map(user, User.class);
         userRepository.save(u);
-        Confirmation confirmation = new Confirmation(u);
-        confirmationRepository.save(confirmation);
-        emailService.sendEmailConfirmation(user.getEmail(),"Successful registration", "You have to confirm your registration: ", confirmation.getToken());
+        ConfirmationToken confirmationToken = new ConfirmationToken(u);
+        confirmationRepository.save(confirmationToken);
+        emailService.sendEmailConfirmation(user.getEmail(),"Successful registration", "You have to confirm your registration: ", confirmationToken.getToken());
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
         return dto;
     }
@@ -85,20 +85,7 @@ public class UserService {
             throw new BadRequestException("Email is taken");
         }
     }
-    private boolean validateToken(String token) {
-        Confirmation confirmation = confirmationRepository.findByToken(token);
-        if(confirmation == null){
-            throw new NotFoundException("Token not found");
-        }
-        User user = userRepository.findByEmail(confirmation.getUser().getEmail());
-        if(user == null){
-            throw new NotFoundException("User not found to validate");
-        }
-        user.setEnabled(true);
-        userRepository.save(user);
-        confirmationRepository.delete(confirmation);
-        return true;
-    }
+
 
     private void validateUsername(String username) {
         if (username == null || username.isBlank()) {
@@ -218,12 +205,10 @@ public class UserService {
         u.setProfileImage(name);
         userRepository.save(u);
         return name;
-
-
     }
 
     public ResponseEntity<String> confirmToken(String token) {
-        Confirmation confirmationToken = confirmationRepository.findByToken(token);
+        ConfirmationToken confirmationToken = confirmationRepository.findByToken(token);
         if(confirmationToken != null){
             User user = confirmationToken.getUser();
             user.setEnabled(true);
@@ -236,6 +221,37 @@ public class UserService {
 
 
     }
+
+    public void passwordEmailSend(RegisterUserDTO user) {
+        User foundUser = userRepository.findByEmail(user.getEmail());
+        if(foundUser == null){
+            throw new NotFoundException("User not found");
+        }
+        ConfirmationToken confirmationToken = new ConfirmationToken(foundUser);
+        confirmationRepository.save(confirmationToken);
+        emailService.sendEmailForgotPassword(foundUser,confirmationToken.getToken());
+    }
+
+
+    public void passwordReset(String token, String newPassword, String confirmNewPassword) {
+        validatePassword(newPassword);
+        if(!newPassword.equals(confirmNewPassword)){
+            throw new BadRequestException("Passwords miss match");
+        }
+        ConfirmationToken confirmationToken = confirmationRepository.findByToken(token);
+        if(confirmationToken == null){
+            throw new NotFoundException("Token not found");
+        }
+        User user = userRepository.findByEmail(confirmationToken.getUser().getEmail());
+        if(user == null){
+            throw new NotFoundException("User not found to validate");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        confirmationRepository.delete(confirmationToken);
+    }
+
+
 }
 
 

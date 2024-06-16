@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.model.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,16 @@ public class EmailService {
     @Async
     public void sendEmailConfirmation(String recipient, String subject, String msg, String token) {
         Message message = prepareMessage(recipient, subject, msg + " click here to confirm - http://localhost:8080/reg/confirm?token=" + token);
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.out.println("Email send failed - " + e.getMessage());
+        }
+    }
+
+    public void sendEmailForgotPassword(User foundUser, String token) {
+        Message message = prepareMessage(foundUser.getEmail(), "Reset your password", "In order to reset your password click here - http://localhost:8080/forgotPassword/reset?token=" + token);
         try {
             Transport.send(message);
         } catch (MessagingException e) {
