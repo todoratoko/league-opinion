@@ -1,15 +1,11 @@
 package com.example.demo.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +24,10 @@ public class User {
     private String profileImage;
     @Column
     private String email;
+    @Column
+    private LocalDateTime createdAt;
+    @Column
+    private LocalDate lastLogin;
     @Column(name = "enabled")
     private boolean isEnabled;
     @OneToMany(mappedBy = "owner")

@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,6 +58,8 @@ public class UserService {
         if (!passwordEncoder.matches(user.getPassword(), u.getPassword())) {
             throw new UnauthorizedException("Wrong  credentials");
         }
+        u.setLastLogin(LocalDate.now());
+        userRepository.save(u);
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
         return dto;
     }
@@ -72,6 +76,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         validateEmail(user.getEmail());
         User u = modelMapper.map(user, User.class);
+        u.setCreatedAt(LocalDateTime.now());
         userRepository.save(u);
         ConfirmationToken confirmationToken = new ConfirmationToken(u);
         confirmationRepository.save(confirmationToken);

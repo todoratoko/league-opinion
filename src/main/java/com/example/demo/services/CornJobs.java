@@ -1,37 +1,39 @@
 package com.example.demo.services;
 
+import com.example.demo.model.entities.User;
+import com.example.demo.model.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Component
 public class CornJobs {
+    @Autowired
+    EmailService emailService;
+    @Autowired
+    UserRepository userRepository;
 
-//        @Scheduled(fixedDelay = 1000*60)
-//    public static void checkInactiveUsers(){
-
-        //  select users that where login in before now-30 days
-        // iterate them
-        //send email to log back in
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    public void checkInactiveUsers() {
+        LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
+        List<User> inactiveUsers = userRepository.findUserByLastLoginBefore(thirtyDaysAgo);
+        for (User user: inactiveUsers) {
+            emailService.sendEmailNotLoggedForMonth(user.getEmail());
+        }
     }
 
-//    @Scheduled(fixedDelay = 1000*60*60*24)
-//    public static void checkInactiveUsers(){
-//        //  select users that where login in before now-30 days
-//        // iterate them
-//        //send email to log back in
-//    }
+    //ToDo
+        @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+        public static void checkIfMatchHasFinished () {
+            //  select matches where matchStartDateTime < now();
+            // set match to finishedMatch = true; ??
+        }
 
 
-//    @Scheduled(fixedDelay = 1000*60*60*24)
-//    public static void checkIfMatchHasFinished(){
-//        //  select matches where matchStartDateTime < now();
-//        // set match to finishedMatch = true; ??
-//    }
 
-    //check if match is live
 
-    //check for inactivity
+    }
 
-    //
-//
-//}

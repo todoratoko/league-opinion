@@ -46,6 +46,16 @@ public class EmailService {
         }
     }
 
+    public void sendEmailNotLoggedForMonth(String email) {
+        Message message = prepareMessage(email, "Come back!", "It looks like you haven't logged in for a while. We miss you!. Come back!");
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.out.println("Email send failed - " + e.getMessage());
+        }
+    }
+
     private Message prepareMessage(String recipient, String subject, String msg) {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", mailAuth);
