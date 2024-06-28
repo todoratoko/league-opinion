@@ -6,7 +6,7 @@ import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.model.entities.Game;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
-import com.example.demo.model.repositories.MatchRepository;
+import com.example.demo.model.repositories.GameRepository;
 import com.example.demo.model.repositories.OpinionRepository;
 import com.example.demo.model.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -22,8 +22,7 @@ public class OpinionService {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    MatchRepository matchRepository;
-
+    GameRepository gameRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -38,8 +37,10 @@ public class OpinionService {
         }
     }
 
+
+
     public OpinionWithOwnerDTO addOpinion(AddOpinionDTO opinion, Long matchId, Long id) {
-        Game game = matchRepository.findById(matchId).orElseThrow(() -> new NotFoundException("There is no such Match"));
+        Game game = gameRepository.findById(matchId).orElseThrow(() -> new NotFoundException("There is no such Match"));
         User ownerUser = userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new NotFoundException("Owner not found"));
         Opinion opinionSave = modelMapper.map(opinion, Opinion.class);
         opinionSave.setOwner(ownerUser);
@@ -48,7 +49,6 @@ public class OpinionService {
         ownerUser.getOpinions().add(opinionSave);
         userRepository.save(ownerUser);
         OpinionWithOwnerDTO opinionWithOwnerDTO = modelMapper.map(opinionSave, OpinionWithOwnerDTO.class);
-        opinionWithOwnerDTO.setGameId(matchId);
         return opinionWithOwnerDTO;
     }
 

@@ -1,5 +1,6 @@
 package com.example.demo.model.dto;
 
+import com.example.demo.model.entities.Game;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ public class OpinionWithOwnerDTO {
     private Date createdAt;
     private int teamOnePercent;
     private int teamTwoPercent;
-    private long gameId;
-    private String  opinion;
+    private String opinion;
+    private Game game;
     private UserWithoutOpinionsDTO owner;
 
 }

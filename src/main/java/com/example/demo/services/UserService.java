@@ -58,6 +58,9 @@ public class UserService {
         if (!passwordEncoder.matches(user.getPassword(), u.getPassword())) {
             throw new UnauthorizedException("Wrong  credentials");
         }
+        if(!u.isEnabled()){
+            throw new UnauthorizedException("You need to confirm your account, trough mail");
+        }
         u.setLastLogin(LocalDate.now());
         userRepository.save(u);
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);

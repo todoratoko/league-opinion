@@ -1,5 +1,6 @@
 package com.example.demo.model.dto;
 
+import com.example.demo.model.entities.Game;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ public class OpinionWithoutOwnerDTO {
     private Date createdAt;
     private int teamOnePercent;
     private int teamTwoPercent;
-    private String  opinion;
+    private Game game;
+    private String opinion;
 
 }

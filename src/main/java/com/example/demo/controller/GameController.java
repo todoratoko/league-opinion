@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.entities.Game;
-import com.example.demo.services.MatchService;
+import com.example.demo.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MatchController {
+public class GameController {
     @Autowired
-    MatchService matchService;
+    GameService gameService;
 
-    @GetMapping("/match/{id}")
+    @GetMapping("/game/{id}")
     public ResponseEntity<Game> getById(@PathVariable int id) {
-        Game game = matchService.getById(id);
+        Game game = gameService.getById(id);
         return ResponseEntity.ok(game);
     }
 }
