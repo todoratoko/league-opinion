@@ -24,7 +24,7 @@ public class OpinionController extends BaseController{
 
 
     @GetMapping("/opinions/{id}")
-    public OpinionWithOwnerDTO getById(@PathVariable int id) {
+    public OpinionWithOwnerDTO getById(@PathVariable long id) {
         OpinionWithOwnerDTO dto = opinionService.getById(id);
         return dto;
     }

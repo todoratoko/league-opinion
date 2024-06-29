@@ -1,8 +1,12 @@
 package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "players")
 public class Player {
     @Id

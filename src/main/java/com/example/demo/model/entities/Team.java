@@ -1,10 +1,14 @@
 package com.example.demo.model.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
+@Setter
+@Getter
 @Table(name = "teams")
 public class Team {
 

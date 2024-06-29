@@ -27,9 +27,10 @@ public class OpinionService {
     private ModelMapper modelMapper;
 
 
-    public OpinionWithOwnerDTO getById(Integer id) {
-        Optional<Opinion> opinion = opinionRepository.findById(Long.valueOf(id));
-        if (opinion.isPresent()) {
+    public OpinionWithOwnerDTO getById(Long id) {
+        Optional<Opinion> opinionOptional = opinionRepository.findById(id);
+        if (opinionOptional.isPresent()) {
+            Opinion opinion = opinionOptional.get();
             OpinionWithOwnerDTO dto = modelMapper.map(opinion, OpinionWithOwnerDTO.class);
             return dto;
         } else {

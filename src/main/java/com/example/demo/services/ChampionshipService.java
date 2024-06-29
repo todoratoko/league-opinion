@@ -13,7 +13,7 @@ public class ChampionshipService {
     @Autowired
     ChampionshipRepository championshipRepository;
 
-    public Championship getById(long id) {
+    public Championship getById(int id) {
         Optional<Championship> championship = championshipRepository.findById(id);
         if(championship.isPresent()){
             return championship.get();
