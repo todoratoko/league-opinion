@@ -26,11 +26,12 @@ public class CornJobs {
     }
 
     //ToDo
-        @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
-        public static void checkIfMatchHasFinished () {
-            //  select matches where matchStartDateTime < now();
-            // set match to finishedMatch = true; ??
-        }
+
+//        @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+//        public static void checkIfMatchHasFinished () {
+//            //  select matches where matchStartDateTime < now();
+//            // set match to finishedMatch = true; ??
+//        }
 
 
 
