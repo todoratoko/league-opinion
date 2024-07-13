@@ -28,12 +28,12 @@ public class ChampionshipServiceTests {
     Championship championship;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         championship = new Championship();
         championship.setId(1);
     }
     @Test
-    public void shouldReturnChampionshipWhenExists() {
+    void shouldReturnChampionshipWhenExists() {
         when(championshipRepository.findById(championship.getId())).thenReturn(Optional.of(championship));
 
         Championship result = championshipService.getById(championship.getId());
@@ -44,7 +44,7 @@ public class ChampionshipServiceTests {
     }
 
     @Test
-    public void shouldThrowNotFoundExceptionWhenChampionshipDoesNotExist() {
+    void shouldThrowNotFoundExceptionWhenChampionshipDoesNotExist() {
         when(championshipRepository.findById(championship.getId())).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> championshipService.getById(championship.getId()));

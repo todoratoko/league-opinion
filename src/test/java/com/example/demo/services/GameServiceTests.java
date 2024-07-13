@@ -27,12 +27,12 @@ public class GameServiceTests {
     Game game;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         game = new Game();
         game.setId(1);
     }
     @Test
-    public void shouldReturnGameWhenExists() {
+    void shouldReturnGameWhenExists() {
         when(gameRepository.findById(game.getId())).thenReturn(Optional.of(game));
 
         Game result = gameService.getById(game.getId());
@@ -43,7 +43,7 @@ public class GameServiceTests {
     }
 
     @Test
-    public void shouldThrowNotFoundExceptionWhenGameDoesNotExist() {
+    void shouldThrowNotFoundExceptionWhenGameDoesNotExist() {
         when(gameRepository.findById(game.getId())).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> gameService.getById(game.getId()));

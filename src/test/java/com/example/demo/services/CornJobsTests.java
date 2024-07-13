@@ -27,7 +27,7 @@ public class CornJobsTests {
     private List<User> inactiveUsers;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         inactiveUsers = new ArrayList<>();
         User user1 = new User();
         User user2 = new User();
@@ -38,7 +38,7 @@ public class CornJobsTests {
     }
 
     @Test
-    public void shouldSendEmailToInactiveUsers(){
+    void shouldSendEmailToInactiveUsers(){
         LocalDate thirtyDatsAgo = LocalDate.now().minusDays(30);
 
         when(userRepository.findUserByLastLoginBefore(thirtyDatsAgo)).thenReturn(inactiveUsers);
@@ -51,7 +51,7 @@ public class CornJobsTests {
     }
 
     @Test
-    public void shouldNotSendEmailToInactiveUsers(){
+    void shouldNotSendEmailToInactiveUsers(){
         LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
 
         when(userRepository.findUserByLastLoginBefore(thirtyDaysAgo)).thenReturn(new ArrayList<>());

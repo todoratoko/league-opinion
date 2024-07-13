@@ -24,13 +24,13 @@ public class TeamServiceTests {
     Team team;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         team = new Team();
         team.setId(1);
     }
 
     @Test
-    public void shouldReturnTeamWhenExists() {
+    void shouldReturnTeamWhenExists() {
         when(teamRepository.findById(team.getId())).thenReturn(Optional.of(team));
 
         Team result = teamService.getById(team.getId());
@@ -41,7 +41,7 @@ public class TeamServiceTests {
     }
 
     @Test
-    public void shouldThrowNotFoundExceptionWhenTeamDoesNotExist() {
+    void shouldThrowNotFoundExceptionWhenTeamDoesNotExist() {
         when(teamRepository.findById(team.getId())).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> teamService.getById(team.getId()));

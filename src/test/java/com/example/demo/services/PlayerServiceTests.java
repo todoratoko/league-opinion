@@ -27,12 +27,12 @@ public class PlayerServiceTests {
     Player player;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         player = new Player();
         player.setId(1);
     }
     @Test
-    public void shouldReturnChampionshipWhenExists() {
+    void shouldReturnChampionshipWhenExists() {
         when(playerRepository.findById(player.getId())).thenReturn(Optional.of(player));
 
         Player result = playerService.getById(player.getId());
@@ -43,7 +43,7 @@ public class PlayerServiceTests {
     }
 
     @Test
-    public void shouldThrowNotFoundExceptionWhenChampionshipDoesNotExist() {
+    void shouldThrowNotFoundExceptionWhenChampionshipDoesNotExist() {
         when(playerRepository.findById(player.getId())).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> playerService.getById(player.getId()));

@@ -1,6 +1,9 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.model.entities.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,8 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 @Service
+@Getter
+@Setter
 public class EmailService {
     @Value("${mail.smtp.auth}")
     private String mailAuth;
@@ -25,11 +30,24 @@ public class EmailService {
     @Value("${mail.smtp.port}")
     private String port;
 
+    public EmailService() {}
+
+    // Constructor for testing
+    public EmailService(String mailAuth, String host, String ttlEnabled,
+                        String senderEmail, String senderPassword, String port) {
+        this.mailAuth = mailAuth;
+        this.host = host;
+        this.ttlEnabled = ttlEnabled;
+        this.senderEmail = senderEmail;
+        this.senderPassword = senderPassword;
+        this.port = port;
+    }
+
     @Async
     public void sendEmailConfirmation(String recipient, String subject, String msg, String token) {
         Message message = prepareMessage(recipient, subject, msg + " click here to confirm - http://localhost:8080/reg/confirm?token=" + token);
         try {
-            Transport.send(message);
+                Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
             System.out.println("Email send failed - " + e.getMessage());
@@ -39,7 +57,8 @@ public class EmailService {
     public void sendEmailForgotPassword(User foundUser, String token) {
         Message message = prepareMessage(foundUser.getEmail(), "Reset your password", "In order to reset your password click here - http://localhost:8080/forgotPassword/reset?token=" + token);
         try {
-            Transport.send(message);
+                Transport.send(message);
+
         } catch (MessagingException e) {
             e.printStackTrace();
             System.out.println("Email send failed - " + e.getMessage());
@@ -49,14 +68,17 @@ public class EmailService {
     public void sendEmailNotLoggedForMonth(String email) {
         Message message = prepareMessage(email, "Come back!", "It looks like you haven't logged in for a while. We miss you!. Come back!");
         try {
-            Transport.send(message);
+                Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
             System.out.println("Email send failed - " + e.getMessage());
         }
     }
 
-    private Message prepareMessage(String recipient, String subject, String msg) {
+    protected Message prepareMessage(String recipient, String subject, String msg) {
+        if (mailAuth == null || ttlEnabled == null || host == null || port == null || senderEmail == null || senderPassword == null) {
+            throw new NotFoundException("One or more email configuration parameters are missing");
+        }
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", mailAuth);
         properties.put("mail.smtp.starttls.enable", ttlEnabled);
@@ -71,6 +93,7 @@ public class EmailService {
             }
         });
         Message message = new MimeMessage(session);
+
         try {
             message.setFrom(new InternetAddress(myAccount));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));

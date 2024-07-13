@@ -44,7 +44,7 @@ public class OpinionServiceTests {
     private OpinionWithOwnerDTO opinionWithOwnerDTO;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         long gameId = 1;
         game = new Game();
         game.setId(gameId);
@@ -63,7 +63,7 @@ public class OpinionServiceTests {
 
     @Test
     @DisplayName("Test add opinion")
-    public void shouldAddOpinion() {
+    void shouldAddOpinion() {
         long userId = 109;
         long gameId = 1;
 
@@ -97,7 +97,7 @@ public class OpinionServiceTests {
     }
 
     @Test
-    public void shouldReturnOpinionWithOwnerDTOWhenOpinionExists() {
+    void shouldReturnOpinionWithOwnerDTOWhenOpinionExists() {
         when(opinionRepository.findById(opinion.getId())).thenReturn(Optional.of(opinion));
         when(modelMapper.map(opinion, OpinionWithOwnerDTO.class)).thenReturn(opinionWithOwnerDTO);
 
@@ -111,7 +111,7 @@ public class OpinionServiceTests {
     }
 
     @Test
-    public void shouldThrowNotFoundExceptionWhenOpinionDoesNotExist() {
+    void shouldThrowNotFoundExceptionWhenOpinionDoesNotExist() {
         when(opinionRepository.findById(game.getId())).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> opinionService.getById(Long.valueOf(opinion.getId())));
