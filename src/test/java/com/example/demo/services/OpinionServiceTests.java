@@ -9,6 +9,8 @@ import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.GameRepository;
 import com.example.demo.model.repositories.OpinionRepository;
 import com.example.demo.model.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +29,11 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class OpinionServiceTests {
+    @Mock
+    private HttpServletRequest request;
+
+    @Mock
+    private HttpServletResponse response;
     @InjectMocks
     private OpinionService opinionService;
     @Mock
@@ -83,7 +90,7 @@ public class OpinionServiceTests {
         when(opinionRepository.save(opinion)).thenReturn(opinion);
         when(modelMapper.map(opinion, OpinionWithOwnerDTO.class)).thenReturn(opinionWithOwnerDTO);
 
-        OpinionWithOwnerDTO result = opinionService.addOpinion(addOpinionDTO, gameId, userId);
+        OpinionWithOwnerDTO result = opinionService.addOpinion(addOpinionDTO, gameId, userId, response, request);
 
         assertNotNull(result);
         assertEquals(game.getId(), result.getGame().getId());

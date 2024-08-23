@@ -11,6 +11,8 @@ import com.example.demo.model.repositories.ConfirmationRepository;
 import com.example.demo.model.repositories.UserRepository;
 import com.example.demo.model.entities.ConfirmationToken;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 import org.modelmapper.ModelMapper;
@@ -31,6 +33,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+    public static final String LOGGED = "logged";
+    public static final String USER_ID = "user_id";
+    public static final String LOGGED_FROM = "logged_from";
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -41,8 +46,12 @@ public class UserService {
     private EmailService emailService;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private JwtService jwtService;
 
-    public UserResponseDTO login(User user) {
+
+
+    public UserResponseDTO login(User user, HttpServletResponse response, HttpServletRequest request) {
         String username = user.getUsername();
         String password = user.getPassword();
         if (username == null || username.isBlank()) {
@@ -61,9 +70,14 @@ public class UserService {
         if(!u.isEnabled()){
             throw new UnauthorizedException("You need to confirm your account, trough mail");
         }
+        request.getSession().setAttribute(LOGGED, true);
+        request.getSession().setAttribute(USER_ID, u.getId());
+        request.getSession().setAttribute(LOGGED_FROM, request.getRemoteAddr());
         u.setLastLogin(LocalDate.now());
         userRepository.save(u);
         UserResponseDTO dto = modelMapper.map(u, UserResponseDTO.class);
+        String token = jwtService.generateToken(user);
+        response.setHeader("Authorization", "Bearer " + token);
         return dto;
     }
 
@@ -132,8 +146,9 @@ public class UserService {
         }
     }
 
-    public UserResponseDTO edit(EditUserDTO user, long id, HttpServletRequest request) {
-        UserController.validateLogin(request);
+    public UserResponseDTO edit(EditUserDTO user, long id, HttpServletRequest request, HttpServletResponse response) {
+        validateLogin(request);
+        checkAndRenewToken(request, response);
         if (user.getNewPassword() != null && user.getConfirmNewPassword() != null) {
             validatePassword(user.getNewPassword());
             if (!user.getNewPassword().equals(user.getConfirmNewPassword())) {
@@ -167,8 +182,9 @@ public class UserService {
         }
     }
 
-    public UserResponseDTO followUser(long followingId, long userId, HttpServletRequest request) {
-        UserController.validateLogin(request);
+    public UserResponseDTO followUser(long followingId, long userId, HttpServletRequest request, HttpServletResponse response) {
+        checkAndRenewToken(request, response);
+        validateLogin(request);
         User user = getUserById(userId);
         User following = getUserById(followingId);
         if (user.getFollowing().contains(following)) {
@@ -184,8 +200,11 @@ public class UserService {
     }
 
 
-    public UserResponseDTO unfollowUser(long followingId, Long userId, HttpServletRequest request) {
-        UserController.validateLogin(request);
+
+
+    public UserResponseDTO unfollowUser(long followingId, Long userId, HttpServletRequest request, HttpServletResponse response) {
+        checkAndRenewToken(request, response);
+        validateLogin(request);
         User user = getUserById(userId);
         User following = getUserById(followingId);
         if (!user.getFollowing().contains(following)) {
@@ -197,14 +216,14 @@ public class UserService {
         return dto;
     }
 
-    // iznesi go na chitavo mqsto
-    private User getUserById(long userId) {
+     User getUserById(long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     @SneakyThrows
-    public String uploadFile(MultipartFile file, HttpServletRequest request) {
-        UserController.validateLogin(request);
+    public String uploadFile(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+        checkAndRenewToken(request, response);
+        validateLogin(request);
         long loggedUserId = (long) request.getSession().getAttribute(UserController.USER_ID);
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         String name = System.nanoTime() + "." + extension;
@@ -215,7 +234,7 @@ public class UserService {
         return name;
     }
 
-    public ResponseEntity<String> confirmToken(String token) {
+    public ResponseEntity<String> confirmMailToken(String token) {
         ConfirmationToken confirmationToken = confirmationRepository.findByToken(token);
         if(confirmationToken != null){
             User user = confirmationToken.getUser();
@@ -259,6 +278,33 @@ public class UserService {
         confirmationRepository.delete(confirmationToken);
     }
 
+    public static void validateLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        boolean newSession = session.isNew();
+        boolean logged = session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED));
+        boolean sameIp = request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM));
+        if (newSession || !logged || !sameIp) {
+            throw new UnauthorizedException("You have to log in!");
+        }
+    }
+
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            return header.substring(7);
+        }
+        throw new UnauthorizedException("Missing or invalid Authorization header");
+    }
+
+    private void checkAndRenewToken(HttpServletRequest request, HttpServletResponse response) {
+        String token = extractTokenFromRequest(request);
+        String newToken = jwtService.isTokenValidAndRenew(token);
+        if (newToken != null) {
+            response.setHeader("Authorization", "Bearer " + newToken);
+        } else {
+            throw new UnauthorizedException("Invalid or expired token");
+        }
+    }
 
 }
 

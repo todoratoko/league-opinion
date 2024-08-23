@@ -28,6 +28,8 @@ public class User {
     private LocalDateTime createdAt;
     @Column
     private LocalDate lastLogin;
+    @Column
+    private Integer loginAttempts; //ToDo
     @Column(name = "enabled")
     private boolean isEnabled;
     @OneToMany(mappedBy = "owner")

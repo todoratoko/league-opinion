@@ -5,6 +5,7 @@ import com.example.demo.model.dto.AddOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.services.OpinionService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -29,9 +30,9 @@ public class OpinionController extends BaseController{
         return dto;
     }
     @PostMapping("/match/opinions/{matchId}")
-    public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, @PathVariable long matchId, HttpSession session, HttpServletRequest request){
+    public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, @PathVariable long matchId, HttpSession session, HttpServletRequest request, HttpServletResponse response){
         validateLogin(session, request);
-        return opinionService.addOpinion(opinion, matchId, (Long) session.getAttribute(UserController.USER_ID));
+        return opinionService.addOpinion(opinion, matchId, (Long) session.getAttribute(UserController.USER_ID), response, request);
     }
 
 

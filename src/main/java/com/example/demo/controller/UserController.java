@@ -5,37 +5,23 @@ import com.example.demo.model.dto.*;
 import com.example.demo.model.entities.User;
 import com.example.demo.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.SneakyThrows;
-import org.apache.commons.io.FilenameUtils;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.UUID;
-
 @RestController
 public class UserController extends BaseController {
-    public static final String LOGGED = "logged";
     public static final String USER_ID = "user_id";
-    public static final String LOGGED_FROM = "logged_from";
     @Autowired
     private UserService userService;
 
-
     @PostMapping("/login")
-    public UserResponseDTO login(@RequestBody User user, HttpServletRequest request) {
-        UserResponseDTO u = userService.login(user);
-        request.getSession().setAttribute(LOGGED, true);
-        request.getSession().setAttribute(USER_ID, u.getId());
-        request.getSession().setAttribute(LOGGED_FROM, request.getRemoteAddr());
+    public UserResponseDTO login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+        UserResponseDTO u = userService.login(user, response, request);
         return u;
     }
 
@@ -48,7 +34,7 @@ public class UserController extends BaseController {
     @GetMapping("/reg/confirm")
     public ResponseEntity<String> confirmAccount(@RequestParam("token") String token) {
         //TODO login when confirming trough Mail.
-        return userService.confirmToken(token);
+        return userService.confirmMailToken(token);
     }
 
     @PostMapping("/forgotPassword")
@@ -69,8 +55,8 @@ public class UserController extends BaseController {
     }
 
     @PutMapping("/users/edit/{id}")
-    public UserResponseDTO edit(@RequestBody EditUserDTO user, @PathVariable long id, HttpServletRequest request) {
-        UserResponseDTO u = userService.edit(user, id, request);
+    public UserResponseDTO edit(@RequestBody EditUserDTO user, @PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
+        UserResponseDTO u = userService.edit(user, id, request, response);
         return u;
     }
 
@@ -79,30 +65,22 @@ public class UserController extends BaseController {
         session.invalidate();
     }
 
-    public static void validateLogin(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        boolean newSession = session.isNew();
-        boolean logged = session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED));
-        boolean sameIp = request.getRemoteAddr().equals(session.getAttribute(LOGGED_FROM));
-        if (newSession || !logged || !sameIp) {
-            throw new UnauthorizedException("You have to log in!");
-        }
-    }
+
 
     @PostMapping("/users/{id}/follow")
-    public UserResponseDTO followUser(@PathVariable long id, HttpServletRequest request) {
-        return userService.followUser(id, (Long) request.getSession().getAttribute(USER_ID), request);
+    public UserResponseDTO followUser(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
+        return userService.followUser(id, (Long) request.getSession().getAttribute(USER_ID), request, response);
     }
 
     @PostMapping("/users/{id}/unfollow")
-    public UserResponseDTO unfollowUser(@PathVariable long id, HttpServletRequest request) {
-        return userService.unfollowUser(id, (Long) request.getSession().getAttribute(USER_ID), request);
+    public UserResponseDTO unfollowUser(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
+        return userService.unfollowUser(id, (Long) request.getSession().getAttribute(USER_ID), request, response);
     }
 
     @SneakyThrows
     @PostMapping("users/image")
-    public String uploadProfileImage(@RequestParam(name = "file") MultipartFile file, HttpServletRequest request) {
-        return userService.uploadFile(file, request);
+    public String uploadProfileImage(@RequestParam(name = "file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
+        return userService.uploadFile(file, request, response);
     }
 
 }

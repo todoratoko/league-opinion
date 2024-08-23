@@ -16,6 +16,6 @@ public class OpinionWithoutOwnerDTO {
     private int teamOnePercent;
     private int teamTwoPercent;
     private Game game;
-    private String opinion;
+    private String comment;
 
 }
