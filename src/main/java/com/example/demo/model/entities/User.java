@@ -30,7 +30,7 @@ public class User {
     private LocalDate lastLogin;
     @Column
     private Integer loginAttempts; //ToDo
-    @Column(name = "enabled")
+    @Column(name = "is_enabled")
     private boolean isEnabled;
     @OneToMany(mappedBy = "owner")
     private Set<Opinion> opinions;

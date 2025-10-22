@@ -54,6 +54,8 @@ public class UserController extends BaseController {
         return userService.getById(id);
     }
 
+    //add get all users
+
     @PutMapping("/users/edit/{id}")
     public UserResponseDTO edit(@RequestBody EditUserDTO user, @PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
         UserResponseDTO u = userService.edit(user, id, request, response);

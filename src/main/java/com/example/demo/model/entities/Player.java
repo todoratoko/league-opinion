@@ -12,12 +12,10 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+    @Column(name = "name")
     private String gameTag;
     @Column
-    private String firstName;
-    @Column
-    private String lastName;
+    private String role;
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;

@@ -19,6 +19,12 @@ public class Team {
     private String name;
     @Column
     private String tag;
+    @Column
+    private String region;
+    @Column
+    private String image;
+    @Column
+    private String twitter;
     @OneToMany(mappedBy = "team")
     private Set<Player> players;
 }

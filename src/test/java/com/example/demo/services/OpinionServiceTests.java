@@ -44,6 +44,8 @@ public class OpinionServiceTests {
     private ModelMapper modelMapper;
     @Mock
     private GameRepository gameRepository;
+    @Mock
+    private JwtService jwtService;
     private AddOpinionDTO addOpinionDTO;
     private Game game;
     private User ownerUser;
@@ -65,7 +67,7 @@ public class OpinionServiceTests {
         opinionWithOwnerDTO.setGame(game);
         opinionWithOwnerDTO.setTeamOnePercent(60);
         opinionWithOwnerDTO.setTeamTwoPercent(40);
-        opinionWithOwnerDTO.setOpinion("I think faker wrist is swollen");
+        opinionWithOwnerDTO.setComment("I think faker wrist is swollen");
     }
 
     @Test
@@ -81,8 +83,11 @@ public class OpinionServiceTests {
         addOpinionDTO = new AddOpinionDTO();
         addOpinionDTO.setTeamOnePercent(60);
         addOpinionDTO.setTeamTwoPercent(40);
-        addOpinionDTO.setOpinion("I think faker wrist is swollen");
+        addOpinionDTO.setComment("I think faker wrist is swollen");
 
+        // Mock JWT authentication
+        when(request.getHeader("Authorization")).thenReturn("Bearer test-token");
+        when(jwtService.isTokenValidAndRenew("test-token")).thenReturn("renewed-token");
 
         when(gameRepository.findById(gameId)).thenReturn(Optional.of(game));
         when(userRepository.findById(userId)).thenReturn(Optional.of(ownerUser));

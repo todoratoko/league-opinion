@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Setter
 @Getter
@@ -18,4 +20,6 @@ public class Championship {
     private String tag;
     @Column
     private String region;
+    @Column
+    private Date date;
 }
