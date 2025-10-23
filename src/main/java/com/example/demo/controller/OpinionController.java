@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -28,6 +29,20 @@ public class OpinionController extends BaseController{
     public OpinionWithOwnerDTO getById(@PathVariable long id) {
         OpinionWithOwnerDTO dto = opinionService.getById(id);
         return dto;
+    }
+
+    @GetMapping("/opinions")
+    public List<OpinionWithOwnerDTO> getOpinions(@RequestParam(required = false) Long regionId) {
+        if (regionId != null) {
+            return opinionService.getOpinionsByRegionId(regionId);
+        } else {
+            return opinionService.getAllOpinions();
+        }
+    }
+
+    @GetMapping("/opinions/region/{regionId}")
+    public List<OpinionWithOwnerDTO> getOpinionsByRegion(@PathVariable Long regionId) {
+        return opinionService.getOpinionsByRegionId(regionId);
     }
     @PostMapping("/match/opinions/{matchId}")
     public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, @PathVariable long matchId, HttpSession session, HttpServletRequest request, HttpServletResponse response){

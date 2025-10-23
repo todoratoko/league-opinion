@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class GameController {
@@ -17,5 +20,22 @@ public class GameController {
     public ResponseEntity<Game> getById(@PathVariable int id) {
         Game game = gameService.getById(id);
         return ResponseEntity.ok(game);
+    }
+
+    @GetMapping("/games")
+    public ResponseEntity<List<Game>> getGames(@RequestParam(required = false) Long regionId) {
+        if (regionId != null) {
+            List<Game> games = gameService.getGamesByRegionId(regionId);
+            return ResponseEntity.ok(games);
+        } else {
+            List<Game> games = gameService.getAllGames();
+            return ResponseEntity.ok(games);
+        }
+    }
+
+    @GetMapping("/games/region/{regionId}")
+    public ResponseEntity<List<Game>> getGamesByRegion(@PathVariable Long regionId) {
+        List<Game> games = gameService.getGamesByRegionId(regionId);
+        return ResponseEntity.ok(games);
     }
 }

@@ -44,14 +44,20 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/forgotPassword/confirmation")
-    public ResponseEntity<String> forgotPasswordHandle(@RequestParam("token") String token, @RequestParam("newPassword") String newPassword, @RequestParam("confirmNewPassword") String confirmNewPassword) {
-        userService.passwordReset(token, newPassword, confirmNewPassword);
+    public ResponseEntity<String> forgotPasswordHandle(@RequestBody ResetPasswordDTO resetPasswordDTO) {
+        userService.passwordReset(resetPasswordDTO.getToken(), resetPasswordDTO.getNewPassword(), resetPasswordDTO.getConfirmNewPassword());
         return ResponseEntity.ok("New password was set");
     }
 
     @GetMapping("/users/{id}")
     public UserWithOpinionsDTO getById(@PathVariable int id) {
         return userService.getById(id);
+    }
+
+    // GET /users/{id}/profile - Get user profile with statistics
+    @GetMapping("/users/{id}/profile")
+    public ResponseEntity<UserProfileDTO> getUserProfile(@PathVariable long id, HttpServletRequest request) {
+        return ResponseEntity.ok(userService.getUserProfile(id, request));
     }
 
     //add get all users
@@ -63,8 +69,16 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/logout")
-    public void logOut(HttpSession session) {
-        session.invalidate();
+    public ResponseEntity<String> logOut(HttpSession session, HttpServletRequest request) {
+        try {
+            // Invalidate the session
+            session.invalidate();
+            // Note: JWT tokens are stateless, so the frontend must delete the token from localStorage
+            return ResponseEntity.ok("Logged out successfully. Please clear your authentication token.");
+        } catch (IllegalStateException e) {
+            // Session was already invalidated
+            return ResponseEntity.ok("Already logged out");
+        }
     }
 
 
@@ -83,6 +97,18 @@ public class UserController extends BaseController {
     @PostMapping("users/image")
     public String uploadProfileImage(@RequestParam(name = "file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
         return userService.uploadFile(file, request, response);
+    }
+
+    // GET /users/{id}/opinions - Get all opinions created by user
+    @GetMapping("/users/{id}/opinions")
+    public ResponseEntity<?> getUserOpinions(@PathVariable long id) {
+        return ResponseEntity.ok(userService.getUserOpinions(id));
+    }
+
+    // GET /users/{id}/liked-opinions - Get all opinions liked by user
+    @GetMapping("/users/{id}/liked-opinions")
+    public ResponseEntity<?> getUserLikedOpinions(@PathVariable long id) {
+        return ResponseEntity.ok(userService.getUserLikedOpinions(id));
     }
 
 }

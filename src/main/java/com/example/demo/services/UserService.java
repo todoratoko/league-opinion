@@ -5,6 +5,7 @@ import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.*;
+import com.example.demo.model.entities.Game;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.ConfirmationRepository;
@@ -27,6 +28,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,19 +50,22 @@ public class UserService {
     private ModelMapper modelMapper;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private OpinionService opinionService;
 
 
 
     public UserResponseDTO login(User user, HttpServletResponse response, HttpServletRequest request) {
-        String username = user.getUsername();
+        String usernameOrEmail = user.getUsername();
         String password = user.getPassword();
-        if (username == null || username.isBlank()) {
-            throw new BadRequestException("User name is mandatory");
+        if (usernameOrEmail == null || usernameOrEmail.isBlank()) {
+            throw new BadRequestException("Username or email is mandatory");
         }
         if (password == null || password.isBlank()) {
             throw new BadRequestException("Password field is mandatory");
         }
-        User u = userRepository.findByUsername(username);
+        // Find user by username OR email in a single query
+        User u = userRepository.findByUsernameOrEmail(usernameOrEmail);
         if (u == null) {
             throw new UnauthorizedException("Wrong  credentials");
         }
@@ -83,10 +88,10 @@ public class UserService {
 
     public UserResponseDTO register(RegisterUserDTO user) {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
-            throw new NotFoundException("Passwords do not match");
+            throw new BadRequestException("Passwords do not match");
         }
         if (!user.getEmail().equals(user.getConfirmEmail())) {
-            throw new NotFoundException("Emails do not match");
+            throw new BadRequestException("Emails do not match");
         }
         validateUsername(user.getUsername());
         validatePassword(user.getPassword());
@@ -103,8 +108,14 @@ public class UserService {
     }
 
     private void validateEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new BadRequestException("Email is mandatory");
+        }
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+            throw new BadRequestException("Invalid email format");
+        }
         if (userRepository.findByEmail(email) != null) {
-            throw new BadRequestException("Email is taken");
+            throw new BadRequestException("Email is already taken");
         }
     }
 
@@ -146,6 +157,86 @@ public class UserService {
         }
     }
 
+    public UserProfileDTO getUserProfile(long id, HttpServletRequest request) {
+        User user = getUserById(id);
+
+        UserProfileDTO dto = new UserProfileDTO();
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setProfileImage(user.getProfileImage());
+        dto.setCreatedAt(user.getCreatedAt());
+
+        // Only include email if viewing own profile
+        Long loggedUserId = (Long) request.getSession().getAttribute(USER_ID);
+        if (loggedUserId != null && loggedUserId == id) {
+            dto.setEmail(user.getEmail());
+        }
+
+        // Check if current user is following this profile
+        boolean isFollowing = false;
+        if (loggedUserId != null && loggedUserId != id) {
+            try {
+                User currentUser = getUserById(loggedUserId);
+                isFollowing = currentUser.getFollowing().contains(user);
+            } catch (Exception e) {
+                // User not found or error, isFollowing stays false
+            }
+        }
+        dto.setFollowing(isFollowing);
+
+        // Calculate and set statistics
+        UserStatisticsDTO statistics = calculateUserStatistics(user);
+        dto.setStatistics(statistics);
+
+        return dto;
+    }
+
+    private UserStatisticsDTO calculateUserStatistics(User user) {
+        Set<Opinion> opinions = user.getOpinions();
+        int totalOpinions = opinions.size();
+
+        // Calculate accuracy on finished games
+        double accuracy = 0.0;
+        if (totalOpinions > 0) {
+            long correctPredictions = opinions.stream()
+                .filter(opinion -> opinion.getGame().getIsFinished() != null && opinion.getGame().getIsFinished())
+                .filter(this::isPredictionCorrect)
+                .count();
+
+            long finishedGamesCount = opinions.stream()
+                .filter(opinion -> opinion.getGame().getIsFinished() != null && opinion.getGame().getIsFinished())
+                .count();
+
+            if (finishedGamesCount > 0) {
+                accuracy = (correctPredictions * 100.0) / finishedGamesCount;
+            }
+        }
+
+        // Calculate followers and following counts
+        int followersCount = user.getFollowers() != null ? user.getFollowers().size() : 0;
+        int followingCount = user.getFollowing() != null ? user.getFollowing().size() : 0;
+
+        return new UserStatisticsDTO(totalOpinions, accuracy, followersCount, followingCount);
+    }
+
+    private boolean isPredictionCorrect(Opinion opinion) {
+        Game game = opinion.getGame();
+
+        // Check if game has scores
+        if (game.getTeamOneScore() == null || game.getTeamTwoScore() == null) {
+            return false;
+        }
+
+        // Determine predicted winner (team with higher percentage)
+        boolean predictedTeamOne = opinion.getTeamOnePercent() > opinion.getTeamTwoPercent();
+
+        // Determine actual winner (team with higher score)
+        boolean actualTeamOne = game.getTeamOneScore() > game.getTeamTwoScore();
+
+        // Check if prediction matches actual result
+        return predictedTeamOne == actualTeamOne;
+    }
+
     public UserResponseDTO edit(EditUserDTO user, long id, HttpServletRequest request, HttpServletResponse response) {
         validateLogin(request);
         checkAndRenewToken(request, response);
@@ -165,7 +256,7 @@ public class UserService {
             throw new UnauthorizedException("Wrong  credentials");
         }
         if (user.getNewPassword() != null) {
-            newUser.setPassword(user.getNewPassword());
+            newUser.setPassword(passwordEncoder.encode(user.getNewPassword()));
         }
         if (user.getEmail() != null) {
             newUser.setEmail(user.getEmail());
@@ -254,6 +345,9 @@ public class UserService {
         if(foundUser == null){
             throw new NotFoundException("User not found");
         }
+        // Delete old confirmation tokens to prevent unique constraint violation
+        confirmationRepository.deleteByUser(foundUser);
+
         ConfirmationToken confirmationToken = new ConfirmationToken(foundUser);
         confirmationRepository.save(confirmationToken);
         emailService.sendEmailForgotPassword(foundUser,confirmationToken.getToken());
@@ -304,6 +398,14 @@ public class UserService {
         } else {
             throw new UnauthorizedException("Invalid or expired token");
         }
+    }
+
+    public List<?> getUserOpinions(Long userId) {
+        return opinionService.getUserOpinions(userId);
+    }
+
+    public List<?> getUserLikedOpinions(Long userId) {
+        return opinionService.getUserLikedOpinions(userId);
     }
 
 }

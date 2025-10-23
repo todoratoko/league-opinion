@@ -1,5 +1,6 @@
 package com.example.demo.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,11 +14,15 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "name")
-    private String gameTag;
+    private String name;  // Player name/game tag
     @Column
-    private String role;
+    private String nickname;  // Optional nickname
+    @Column
+    private String role;  // Top, Jungle, Mid, ADC, Support
+    @Column
+    private String image;  // Player image URL
     @ManyToOne
     @JoinColumn(name = "team_id")
+    @JsonBackReference
     private Team team;
-
 }

@@ -8,6 +8,7 @@ import com.example.demo.model.entities.Game;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.GameRepository;
+import com.example.demo.model.repositories.OpinionLikeRepository;
 import com.example.demo.model.repositories.OpinionRepository;
 import com.example.demo.model.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OpinionService {
@@ -30,6 +33,8 @@ public class OpinionService {
     private ModelMapper modelMapper;
     @Autowired
     JwtService jwtService;
+    @Autowired
+    OpinionLikeRepository opinionLikeRepository;
 
 
     public OpinionWithOwnerDTO getById(Long id) {
@@ -77,5 +82,32 @@ public class OpinionService {
         throw new UnauthorizedException("Missing or invalid Authorization header");
     }
 
+    public List<OpinionWithOwnerDTO> getOpinionsByRegionId(Long regionId) {
+        List<Opinion> opinions = opinionRepository.findByGameRegionId(regionId);
+        return opinions.stream()
+                .map(opinion -> modelMapper.map(opinion, OpinionWithOwnerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<OpinionWithOwnerDTO> getAllOpinions() {
+        List<Opinion> opinions = opinionRepository.findAll();
+        return opinions.stream()
+                .map(opinion -> modelMapper.map(opinion, OpinionWithOwnerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<OpinionWithOwnerDTO> getUserOpinions(Long userId) {
+        List<Opinion> opinions = opinionRepository.findByOwnerId(userId);
+        return opinions.stream()
+                .map(opinion -> modelMapper.map(opinion, OpinionWithOwnerDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<OpinionWithOwnerDTO> getUserLikedOpinions(Long userId) {
+        List<Opinion> opinions = opinionLikeRepository.findOpinionsByUserId(userId);
+        return opinions.stream()
+                .map(opinion -> modelMapper.map(opinion, OpinionWithOwnerDTO.class))
+                .collect(Collectors.toList());
+    }
 
 }

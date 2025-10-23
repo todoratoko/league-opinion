@@ -29,6 +29,8 @@ public class EmailService {
     private String senderPassword;
     @Value("${mail.smtp.port}")
     private String port;
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     public EmailService() {}
 
@@ -45,7 +47,7 @@ public class EmailService {
 
     @Async
     public void sendEmailConfirmation(String recipient, String subject, String msg, String token) {
-        Message message = prepareMessage(recipient, subject, msg + " click here to confirm - http://localhost:8080/reg/confirm?token=" + token);
+        Message message = prepareMessage(recipient, subject, msg + " click here to confirm - http://localhost:8081/reg/confirm?token=" + token);
         try {
                 Transport.send(message);
         } catch (MessagingException e) {
@@ -55,7 +57,7 @@ public class EmailService {
     }
 
     public void sendEmailForgotPassword(User foundUser, String token) {
-        Message message = prepareMessage(foundUser.getEmail(), "Reset your password", "In order to reset your password click here - http://localhost:8080/forgotPassword/reset?token=" + token);
+        Message message = prepareMessage(foundUser.getEmail(), "Reset your password", "In order to reset your password click here - " + frontendUrl + "/reset-password?token=" + token);
         try {
                 Transport.send(message);
 

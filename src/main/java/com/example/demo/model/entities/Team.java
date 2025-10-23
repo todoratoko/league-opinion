@@ -1,5 +1,6 @@
 package com.example.demo.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,15 +17,20 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private String name;
+    private String name;  // Short name (e.g., "T1")
     @Column
-    private String tag;
+    private String fullName;  // Full team name (e.g., "SK Telecom T1")
     @Column
-    private String region;
+    private String tag;  // Team tag/code
     @Column
-    private String image;
+    private String region;  // Region string
     @Column
-    private String twitter;
-    @OneToMany(mappedBy = "team")
+    private String country;  // Country name
+    @Column
+    private String image;  // Team logo URL
+    @Column
+    private String twitter;  // Twitter handle
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<Player> players;
 }
