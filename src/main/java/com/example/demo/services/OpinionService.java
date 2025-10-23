@@ -1,14 +1,17 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
+import com.example.demo.model.dto.ResponseMessage;
 import com.example.demo.model.dto.AddOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.model.entities.Game;
 import com.example.demo.model.entities.Opinion;
 import com.example.demo.model.entities.User;
 import com.example.demo.model.repositories.GameRepository;
-import com.example.demo.model.repositories.OpinionLikeRepository;
+import com.example.demo.model.repositories.OpinionSaveRepository;
+import com.example.demo.model.entities.OpinionSave;
 import com.example.demo.model.repositories.OpinionRepository;
 import com.example.demo.model.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +37,7 @@ public class OpinionService {
     @Autowired
     JwtService jwtService;
     @Autowired
-    OpinionLikeRepository opinionLikeRepository;
+    OpinionSaveRepository opinionSaveRepository;
 
 
     public OpinionWithOwnerDTO getById(Long id) {
@@ -103,11 +106,49 @@ public class OpinionService {
                 .collect(Collectors.toList());
     }
 
-    public List<OpinionWithOwnerDTO> getUserLikedOpinions(Long userId) {
-        List<Opinion> opinions = opinionLikeRepository.findOpinionsByUserId(userId);
+    public List<OpinionWithOwnerDTO> getUserSavedOpinions(Long userId) {
+        List<Opinion> opinions = opinionSaveRepository.findOpinionsByUserId(userId);
         return opinions.stream()
                 .map(opinion -> modelMapper.map(opinion, OpinionWithOwnerDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public ResponseMessage saveOpinion(Long opinionId, Long userId, HttpServletRequest request, HttpServletResponse response) {
+        checkAndRenewToken(request, response);
+
+        Opinion opinion = opinionRepository.findById(opinionId)
+                .orElseThrow(() -> new NotFoundException("Opinion not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        // Check if already saved
+        if (opinionSaveRepository.existsByOpinionAndUser(opinion, user)) {
+            throw new BadRequestException("Opinion already saved");
+        }
+
+        OpinionSave opinionSave = new OpinionSave();
+        opinionSave.setOpinion(opinion);
+        opinionSave.setUser(user);
+        opinionSave.setCreatedAt(java.time.LocalDateTime.now());
+        opinionSaveRepository.save(opinionSave);
+
+        return new ResponseMessage("Opinion saved successfully");
+    }
+
+    public ResponseMessage unsaveOpinion(Long opinionId, Long userId, HttpServletRequest request, HttpServletResponse response) {
+        checkAndRenewToken(request, response);
+
+        Opinion opinion = opinionRepository.findById(opinionId)
+                .orElseThrow(() -> new NotFoundException("Opinion not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        OpinionSave opinionSave = opinionSaveRepository.findByOpinionAndUser(opinion, user)
+                .orElseThrow(() -> new NotFoundException("Opinion not saved"));
+
+        opinionSaveRepository.delete(opinionSave);
+
+        return new ResponseMessage("Opinion unsaved successfully");
     }
 
 }

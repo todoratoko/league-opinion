@@ -36,7 +36,7 @@ public class DataInitController {
     private PlayerRepository playerRepository;
 
     @Autowired
-    private OpinionLikeRepository opinionLikeRepository;
+    private OpinionSaveRepository opinionSaveRepository;
 
     @PostMapping("/api/cleanup-old-teams")
     public ResponseEntity<Map<String, Object>> cleanupOldTeams() {
@@ -207,26 +207,32 @@ public class DataInitController {
             Opinion op16 = createOpinion(70, 30, "G2 is good but T1 is on another level internationally.", user2, game6);
             Opinion op17 = createOpinion(65, 35, "East vs West, and East wins. T1 by a mile.", user3, game6);
 
+            // Add opinion for user deep4ho1 if exists (90-10 prediction)
+            User deep4ho1 = userRepository.findByUsername("deep4ho1");
+            if (deep4ho1 != null) {
+                createOpinion(90, 10, "This is a complete stomp! Team one dominates!", deep4ho1, game1);
+            }
+
             // Create opinion likes (users liking other users' opinions)
             // User1 likes some opinions from user2 and user3
-            createOpinionLike(user1, op2);  // user1 likes user2's opinion on T1 vs Gen.G
-            createOpinionLike(user1, op5);  // user1 likes user2's opinion on G2 vs Fnatic
-            createOpinionLike(user1, op11); // user1 likes user2's opinion on JDG vs BLG
-            createOpinionLike(user1, op6);  // user1 likes user3's opinion on G2 vs Fnatic
+            createOpinionSave(user1, op2);  // user1 likes user2's opinion on T1 vs Gen.G
+            createOpinionSave(user1, op5);  // user1 likes user2's opinion on G2 vs Fnatic
+            createOpinionSave(user1, op11); // user1 likes user2's opinion on JDG vs BLG
+            createOpinionSave(user1, op6);  // user1 likes user3's opinion on G2 vs Fnatic
 
             // User2 likes some opinions from user1 and user3
-            createOpinionLike(user2, op1);  // user2 likes user1's opinion on T1 vs Gen.G
-            createOpinionLike(user2, op7);  // user2 likes user1's opinion on C9 vs TL
-            createOpinionLike(user2, op10); // user2 likes user1's opinion on JDG vs BLG
-            createOpinionLike(user2, op3);  // user2 likes user3's opinion on T1 vs Gen.G
-            createOpinionLike(user2, op9);  // user2 likes user3's opinion on C9 vs TL
+            createOpinionSave(user2, op1);  // user2 likes user1's opinion on T1 vs Gen.G
+            createOpinionSave(user2, op7);  // user2 likes user1's opinion on C9 vs TL
+            createOpinionSave(user2, op10); // user2 likes user1's opinion on JDG vs BLG
+            createOpinionSave(user2, op3);  // user2 likes user3's opinion on T1 vs Gen.G
+            createOpinionSave(user2, op9);  // user2 likes user3's opinion on C9 vs TL
 
             // User3 likes some opinions from user1 and user2
-            createOpinionLike(user3, op1);  // user3 likes user1's opinion on T1 vs Gen.G
-            createOpinionLike(user3, op4);  // user3 likes user1's opinion on G2 vs Fnatic
-            createOpinionLike(user3, op13); // user3 likes user1's opinion on Gen.G vs T1 (rematch)
-            createOpinionLike(user3, op2);  // user3 likes user2's opinion on T1 vs Gen.G
-            createOpinionLike(user3, op8);  // user3 likes user2's opinion on C9 vs TL
+            createOpinionSave(user3, op1);  // user3 likes user1's opinion on T1 vs Gen.G
+            createOpinionSave(user3, op4);  // user3 likes user1's opinion on G2 vs Fnatic
+            createOpinionSave(user3, op13); // user3 likes user1's opinion on Gen.G vs T1 (rematch)
+            createOpinionSave(user3, op2);  // user3 likes user2's opinion on T1 vs Gen.G
+            createOpinionSave(user3, op8);  // user3 likes user2's opinion on C9 vs TL
 
             response.put("success", true);
             response.put("message", "Test data initialized successfully with real teams and players!");
@@ -235,7 +241,7 @@ public class DataInitController {
             response.put("users", userRepository.count());
             response.put("games", gameRepository.count());
             response.put("opinions", opinionRepository.count());
-            response.put("opinionLikes", opinionLikeRepository.count());
+            response.put("opinionLikes", opinionSaveRepository.count());
 
             return ResponseEntity.ok(response);
 
@@ -304,11 +310,11 @@ public class DataInitController {
         return playerRepository.save(player);
     }
 
-    private OpinionLike createOpinionLike(User user, Opinion opinion) {
-        OpinionLike like = new OpinionLike();
+    private OpinionSave createOpinionSave(User user, Opinion opinion) {
+        OpinionSave like = new OpinionSave();
         like.setUser(user);
         like.setOpinion(opinion);
         like.setCreatedAt(LocalDateTime.now());
-        return opinionLikeRepository.save(like);
+        return opinionSaveRepository.save(like);
     }
 }

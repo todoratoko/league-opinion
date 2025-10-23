@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "opinion_likes",
+@Table(name = "opinion_saves",
        uniqueConstraints = @UniqueConstraint(columnNames = {"opinion_id", "user_id"}))
-public class OpinionLike {
+public class OpinionSave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -404,8 +404,34 @@ public class UserService {
         return opinionService.getUserOpinions(userId);
     }
 
-    public List<?> getUserLikedOpinions(Long userId) {
-        return opinionService.getUserLikedOpinions(userId);
+    public List<?> getUserSavedOpinions(Long userId) {
+        return opinionService.getUserSavedOpinions(userId);
+    }
+
+    // ========== USERNAME-BASED METHODS (Pretty URLs) ==========
+
+    public UserProfileDTO getUserProfileByUsername(String username, HttpServletRequest request) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new NotFoundException("User not found with username: " + username);
+        }
+        return getUserProfile(user.getId(), request);
+    }
+
+    public List<?> getUserOpinionsByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new NotFoundException("User not found with username: " + username);
+        }
+        return opinionService.getUserOpinions(user.getId());
+    }
+
+    public List<?> getUserSavedOpinionsByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new NotFoundException("User not found with username: " + username);
+        }
+        return opinionService.getUserSavedOpinions(user.getId());
     }
 
 }

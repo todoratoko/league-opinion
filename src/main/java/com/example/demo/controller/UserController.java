@@ -105,10 +105,30 @@ public class UserController extends BaseController {
         return ResponseEntity.ok(userService.getUserOpinions(id));
     }
 
-    // GET /users/{id}/liked-opinions - Get all opinions liked by user
-    @GetMapping("/users/{id}/liked-opinions")
-    public ResponseEntity<?> getUserLikedOpinions(@PathVariable long id) {
-        return ResponseEntity.ok(userService.getUserLikedOpinions(id));
+    // GET /users/{id}/saved-opinions - Get all opinions saved by user
+    @GetMapping("/users/{id}/saved-opinions")
+    public ResponseEntity<?> getUserSavedOpinions(@PathVariable long id) {
+        return ResponseEntity.ok(userService.getUserSavedOpinions(id));
+    }
+
+    // ========== USERNAME-BASED ENDPOINTS (Pretty URLs) ==========
+
+    // GET /users/username/{username}/profile - Get user profile by username (pretty URL)
+    @GetMapping("/users/username/{username}/profile")
+    public ResponseEntity<UserProfileDTO> getUserProfileByUsername(@PathVariable String username, HttpServletRequest request) {
+        return ResponseEntity.ok(userService.getUserProfileByUsername(username, request));
+    }
+
+    // GET /users/username/{username}/opinions - Get user opinions by username (pretty URL)
+    @GetMapping("/users/username/{username}/opinions")
+    public ResponseEntity<?> getUserOpinionsByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserOpinionsByUsername(username));
+    }
+
+    // GET /users/username/{username}/saved-opinions - Get saved opinions by username (pretty URL)
+    @GetMapping("/users/username/{username}/saved-opinions")
+    public ResponseEntity<?> getUserSavedOpinionsByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(userService.getUserSavedOpinionsByUsername(username));
     }
 
 }

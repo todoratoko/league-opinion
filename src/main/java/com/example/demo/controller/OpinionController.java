@@ -3,6 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.AddOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
+import com.example.demo.model.dto.ResponseMessage;
+import com.example.demo.model.entities.User;
+import com.example.demo.model.repositories.UserRepository;
+import com.example.demo.services.JwtService;
 import com.example.demo.services.OpinionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +27,10 @@ public class OpinionController extends BaseController{
     public static final String LOGGED_FROM = "logged_from";
     @Autowired
     private OpinionService opinionService;
+    @Autowired
+    private JwtService jwtService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/opinions/{id}")
@@ -50,8 +58,44 @@ public class OpinionController extends BaseController{
         return opinionService.addOpinion(opinion, matchId, (Long) session.getAttribute(UserController.USER_ID), response, request);
     }
 
+    @PostMapping("/opinions/{opinionId}/save")
+    public ResponseMessage saveOpinion(@PathVariable long opinionId, HttpSession session, HttpServletRequest request, HttpServletResponse response){
+        Long userId = getUserIdFromSessionOrToken(session, request);
+        return opinionService.saveOpinion(opinionId, userId, request, response);
+    }
 
+    @DeleteMapping("/opinions/{opinionId}/save")
+    public ResponseMessage unsaveOpinion(@PathVariable long opinionId, HttpSession session, HttpServletRequest request, HttpServletResponse response){
+        Long userId = getUserIdFromSessionOrToken(session, request);
+        return opinionService.unsaveOpinion(opinionId, userId, request, response);
+    }
 
+    private Long getUserIdFromSessionOrToken(HttpSession session, HttpServletRequest request) {
+        // Try to get user ID from session first (backward compatibility)
+        if (!session.isNew() && session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED))) {
+            Long userId = (Long) session.getAttribute(UserController.USER_ID);
+            if (userId != null) {
+                return userId;
+            }
+        }
+
+        // If session doesn't work, try to extract user ID from JWT token
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            try {
+                String token = authHeader.substring(7);
+                String username = jwtService.extractUsername(token);
+                User user = userRepository.findByUsername(username);
+                if (user != null) {
+                    return user.getId();
+                }
+            } catch (Exception e) {
+                // JWT parsing failed, fall through to unauthorized
+            }
+        }
+
+        throw new UnauthorizedException("You have to log in!");
+    }
 
     private void validateLogin(HttpSession session, HttpServletRequest request) {
         boolean newSession = session.isNew();
