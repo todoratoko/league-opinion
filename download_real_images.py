@@ -21,7 +21,7 @@ PLAYERS_DIR = "src/main/resources/static/images/players"
 # Leaguepedia player page mapping (player name -> wiki page name)
 PLAYER_PAGES = {
     # T1
-    'Doran': 'Doran',
+    'Doran': 'Doran_(Choi_Hyeon-joon)',
     'Oner': 'Oner',
     'Faker': 'Faker',
     'Gumayusi': 'Gumayusi',
@@ -35,27 +35,27 @@ PLAYER_PAGES = {
     # HLE
     'Zeus': 'Zeus',
     'Peanut': 'Peanut',
-    'Zeka': 'Zeka',
-    'Viper': 'Viper',
+    'Zeka': 'Zeka_(Kim_Geon-woo)',
+    'Viper': 'Viper_(Park_Do-hyeon)',
     'Delight': 'Delight',
     # KT
-    'PerfecT': 'PerfecT',
+    'PerfecT': 'PerfecT_(Kim_Dae-yeop)',
     'Cuzz': 'Cuzz',
     'Bdd': 'Bdd',
     'deokdam': 'Deokdam',
     'Peter': 'Peter_(Jeong_Yoon-su)',
     # BLG
-    'Bin': 'Bin',
+    'Bin': 'Bin_(Chen_Ze-Bin)',
     'Beichuan': 'XUN',  # Beichuan's game name
-    'Knight': 'Knight',
+    'Knight': 'Knight_(Zhuo_Ding)',
     'Elk': 'Elk',
     'ON': 'ON',
     # AL
     'Flandre': 'Flandre',
-    'Tarzan': 'Tarzan',
+    'Tarzan': 'Tarzan_(Lee_Seung-yong)',
     'Shanks': 'Shanks',
-    'Hope': 'Hope',
-    'Kael': 'Kael',
+    'Hope': 'Hope_(Wang_Jie)',
+    'Kael': 'Kael_(Kim_Jin-hong)',
     # TES
     '369': '369',
     'Kanavi': 'Kanavi',
@@ -64,7 +64,7 @@ PLAYER_PAGES = {
     'Hang': 'Hang',
     # IG
     'TheShy': 'TheShy',
-    'Wei': 'Wei',
+    'Wei': 'Wei_(Yan_Yang-Wei)',
     'Rookie': 'Rookie',
     'GALA': 'GALA',
     'Meiko': 'Meiko',
@@ -79,7 +79,7 @@ PLAYER_PAGES = {
     'Elyoya': 'Elyoya',
     'Jojopyun': 'Jojopyun',
     'Supa': 'Supa',
-    'Alvaro': 'Alvaro',
+    'Alvaro': 'Alvaro_(Álvaro_Fernández)',
     # FNC
     'Oscarinin': 'Oscarinin',
     'Razork': 'Razork',
@@ -94,14 +94,14 @@ PLAYER_PAGES = {
     'Busio': 'Busio',
     # 100T
     'Dhokla': 'Dhokla',
-    'River': 'River',
+    'River': 'River_(Kim_Dong-woo)',
     'Quid': 'Quid',
     'FBI': 'FBI',
     'Eyla': 'Eyla',
     # PSG
     'Azhi': 'Azhi',
     'Karsa': 'Karsa',
-    'Maple': 'Maple',
+    'Maple': 'Maple_(Huang_Yi-Tang)',
     'Betty': 'Betty',
     'Woody': 'Woody',
     # GAM
@@ -109,13 +109,29 @@ PLAYER_PAGES = {
     'Levi': 'Levi',
     'Emo': 'Emo',
     'Aress': 'Aress',
-    'Artemis': 'Artemis_(Tran_Quoc_Hung)',
+    'Artemis': 'Artemis_(Trần_Quốc_Hưng)',
     # CFO
     'Driver': 'Driver',
     'Rest': 'Rest',
     'JunJia': 'JunJia',
     'HongQ': 'HongQ',
-    'Doggo': 'Doggo'
+    'Doggo': 'Doggo',
+    # VKS (Vivo Keyd Stars)
+    'Boal': 'Boal',
+    'Disamis': 'Disamis',
+    'Mireu': 'Mireu_(Vinícius_Fernandes)',
+    # TSW (Team Secret Whales)
+    'Steller': 'Steller',
+    'Hizto': 'Hizto',
+    'Dire': 'Dire',
+    'Eddie': 'Eddie',
+    'Taki': 'Taki_(Đinh_Anh_Tài)',
+    # FUR (FURIA)
+    'Guigo': 'Guigo',
+    'Tatu': 'Tatu_(Pedro_Seixas)',
+    'Tutsz': 'Tutsz',
+    'Ayu': 'Ayu_(Andrey_Saraiva)',
+    'JoJo': 'JoJo_(Gabriel_Dzelme)'
 }
 
 # Team page mapping
@@ -170,6 +186,14 @@ class ImageExtractor(HTMLParser):
 def fetch_page(url):
     """Fetch a webpage"""
     try:
+        # URL encode the path to handle Unicode characters
+        from urllib.parse import quote
+        # Split URL and encode only the path part
+        if '/wiki/' in url:
+            base = url.split('/wiki/')[0] + '/wiki/'
+            path = url.split('/wiki/')[1]
+            url = base + quote(path, safe='()_-')
+
         req = urllib.request.Request(
             url,
             headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'}

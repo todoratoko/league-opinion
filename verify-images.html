@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Verification Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .player-test {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .player-test img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+        }
+        .player-test .info {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success { background: #4CAF50; color: white; }
+        .error { background: #f44336; color: white; }
+        .placeholder { background: #ff9800; color: white; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Image Verification Test</h1>
+    <p>This page loads images with cache-busting to verify they're real photos (not placeholders)</p>
+
+    <div class="test-section">
+        <h2>Newly Downloaded Players (Should be REAL photos now)</h2>
+        <div id="test-players"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Direct Image Test</h2>
+        <p>These images are loaded with a timestamp to bypass cache:</p>
+        <div id="direct-test"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8081';
+
+        // Players we just downloaded
+        const testPlayers = [
+            { team: 'T1', name: 'Doran', role: 'Top' },
+            { team: 'BLG', name: 'Bin', role: 'Top' },
+            { team: 'BLG', name: 'Knight', role: 'Mid' },
+            { team: 'HLE', name: 'Viper', role: 'ADC' },
+            { team: 'HLE', name: 'Zeka', role: 'Mid' },
+            { team: 'PSG', name: 'Maple', role: 'Mid' },
+            { team: 'AL', name: 'Tarzan', role: 'Jungle' },
+            { team: '100T', name: 'River', role: 'Jungle' },
+            { team: 'IG', name: 'Wei', role: 'Jungle' }
+        ];
+
+        // Direct image test with cache busting
+        const directTest = document.getElementById('direct-test');
+        testPlayers.forEach(player => {
+            const filename = `${player.team.toLowerCase()}-${player.name.toLowerCase()}.png`;
+            const timestamp = new Date().getTime();
+            const imgUrl = `${API_BASE}/images/players/${filename}?t=${timestamp}`;
+
+            directTest.innerHTML += `
+                <div class="player-test">
+                    <img src="${imgUrl}"
+                         alt="${player.name}"
+                         onload="checkImageSize(this, '${player.name}')"
+                         onerror="this.nextElementSibling.innerHTML='<span class=\\'status error\\'>ERROR LOADING</span>'"
+                    />
+                    <div class="info">
+                        <strong>${player.team} - ${player.name}</strong><br>
+                        ${player.role}<br>
+                        <span id="status-${player.name}">Loading...</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        function checkImageSize(img, name) {
+            // Real images are much larger than placeholders
+            // We can estimate by checking if the image looks like a real photo
+            fetch(img.src)
+                .then(response => response.blob())
+                .then(blob => {
+                    const size = blob.size;
+                    const statusEl = document.getElementById(`status-${name}`);
+
+                    if (size > 10000) {
+                        statusEl.innerHTML = `<span class="status success">✓ REAL (${(size/1024).toFixed(0)}KB)</span>`;
+                    } else if (size > 2000) {
+                        statusEl.innerHTML = `<span class="status placeholder">⚠ Placeholder (${(size/1024).toFixed(1)}KB)</span>`;
+                    } else {
+                        statusEl.innerHTML = `<span class="status error">✗ Too small (${size}B)</span>`;
+                    }
+                });
+        }
+
+        // Load from API test
+        async function loadFromAPI() {
+            try {
+                const response = await fetch(`${API_BASE}/teams?t=${new Date().getTime()}`);
+                const teams = await response.json();
+
+                const testPlayersDiv = document.getElementById('test-players');
+                testPlayersDiv.innerHTML = '<p><strong>Loading from API...</strong></p>';
+
+                let found = 0;
+                teams.forEach(team => {
+                    team.players.forEach(player => {
+                        const match = testPlayers.find(tp =>
+                            tp.team === team.tag && tp.name === player.name
+                        );
+
+                        if (match) {
+                            found++;
+                            const timestamp = new Date().getTime();
+                            testPlayersDiv.innerHTML += `
+                                <div class="player-test">
+                                    <img src="${API_BASE}${player.image}?t=${timestamp}"
+                                         alt="${player.name}"
+                                         onload="checkImageSize(this, 'api-${player.name}')"
+                                    />
+                                    <div class="info">
+                                        <strong>${team.tag} - ${player.name}</strong><br>
+                                        ${player.role}<br>
+                                        Path: ${player.image}<br>
+                                        <span id="status-api-${player.name}">Loading...</span>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    });
+                });
+
+                if (found === 0) {
+                    testPlayersDiv.innerHTML = '<p class="status error">ERROR: Could not find test players in API response!</p>';
+                }
+            } catch (error) {
+                document.getElementById('test-players').innerHTML =
+                    `<p class="status error">ERROR: ${error.message}</p>`;
+            }
+        }
+
+        loadFromAPI();
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tournament Filter - League Opinion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        h1 { text-align: center; }
+        .filters {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid #4a9eff;
+            background: #2a2a2a;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover {
+            background: #3a3a3a;
+        }
+        .filter-btn.active {
+            background: #4a9eff;
+            color: #000;
+            font-weight: bold;
+        }
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .team-card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #3a3a3a;
+            transition: all 0.3s;
+        }
+        .team-card:hover {
+            border-color: #4a9eff;
+            transform: translateY(-5px);
+        }
+        .team-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 10px auto;
+            display: block;
+        }
+        .team-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .team-tag {
+            color: #4a9eff;
+            font-size: 14px;
+        }
+        .team-tournaments {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+        .count {
+            text-align: center;
+            font-size: 18px;
+            color: #4a9eff;
+            margin: 20px 0;
+        }
+        .info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4a9eff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tournament Filter Test</h1>
+
+    <div class="info">
+        <strong>Testing tournament filtering with codes:</strong>
+        <ul>
+            <li><code>worlds-2025</code> - Should show 17 teams</li>
+            <li><code>msi-2025</code> - Should show 9 teams</li>
+            <li><code>first-stand</code> - Should show 1 team (Gen.G)</li>
+        </ul>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterTeams('all')">All Teams</button>
+        <button class="filter-btn" onclick="filterTeams('worlds-2025')">Worlds 2025 👑</button>
+        <button class="filter-btn" onclick="filterTeams('msi-2025')">MSI 2025 🏆</button>
+        <button class="filter-btn" onclick="filterTeams('first-stand')">First Stand ⚔️</button>
+    </div>
+
+    <div class="count" id="teamCount"></div>
+    <div class="teams-grid" id="teamsGrid"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:8081';
+        let allTeams = [];
+        let currentFilter = 'all';
+
+        // Fetch all teams
+        fetch(`${API_BASE}/teams`)
+            .then(response => response.json())
+            .then(teams => {
+                allTeams = teams;
+                filterTeams('all');
+            })
+            .catch(error => {
+                console.error('Error loading teams:', error);
+                document.getElementById('teamsGrid').innerHTML =
+                    '<p style="color: red;">Error loading teams. Check console.</p>';
+            });
+
+        function filterTeams(filter) {
+            currentFilter = filter;
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter teams
+            let filteredTeams;
+            if (filter === 'all') {
+                filteredTeams = allTeams;
+            } else {
+                filteredTeams = allTeams.filter(team =>
+                    team.tournaments && team.tournaments.includes(filter)
+                );
+            }
+
+            // Display teams
+            displayTeams(filteredTeams, filter);
+        }
+
+        function displayTeams(teams, filterName) {
+            const grid = document.getElementById('teamsGrid');
+            const count = document.getElementById('teamCount');
+
+            count.textContent = `Showing ${teams.length} team${teams.length !== 1 ? 's' : ''} ${filterName !== 'all' ? `for ${filterName}` : ''}`;
+
+            if (teams.length === 0) {
+                grid.innerHTML = '<p style="color: #888; text-align: center; grid-column: 1/-1;">No teams found for this filter.</p>';
+                return;
+            }
+
+            grid.innerHTML = teams.map(team => `
+                <div class="team-card">
+                    <img class="team-logo"
+                         src="${API_BASE}${team.image}?t=${new Date().getTime()}"
+                         alt="${team.name}"
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2240%22 fill=%22%23666%22>${team.tag}</text></svg>'">
+                    <div class="team-name">${team.name}</div>
+                    <div class="team-tag">${team.tag}</div>
+                    <div class="team-tournaments">
+                        ${team.tournaments ? team.tournaments.join(', ') : 'No tournaments'}
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

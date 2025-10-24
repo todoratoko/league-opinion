@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify New Logos - League Opinion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .logo-card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #3a3a3a;
+        }
+        .logo-card img {
+            max-width: 200px;
+            max-height: 150px;
+            margin: 20px auto;
+            display: block;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .logo-card h3 {
+            margin: 10px 0;
+            color: #4a9eff;
+        }
+        .info {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+        .timestamp {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+        }
+        .instructions {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4a9eff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verify New Logos</h1>
+    <div class="timestamp">
+        Page loaded at: <strong id="timestamp"></strong><br>
+        Cache buster: <strong id="cacheBuster"></strong>
+    </div>
+
+    <div class="instructions">
+        <h3>If you still see the same/old logos:</h3>
+        <ol>
+            <li><strong>Hard refresh this page:</strong>
+                <ul>
+                    <li>Chrome/Edge: Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)</li>
+                    <li>Firefox: Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)</li>
+                    <li>Safari: Cmd+Option+R (Mac)</li>
+                </ul>
+            </li>
+            <li><strong>Clear browser cache:</strong> Open DevTools (F12) → Application/Storage → Clear site data</li>
+            <li><strong>Try incognito/private window:</strong> This bypasses cache completely</li>
+        </ol>
+    </div>
+
+    <h2>League Logos</h2>
+    <div class="logos-grid" id="leaguesGrid"></div>
+
+    <h2>Tournament Logos</h2>
+    <div class="logos-grid" id="tournamentsGrid"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:8081';
+        const cacheBuster = new Date().getTime();
+
+        // Display timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        document.getElementById('cacheBuster').textContent = cacheBuster;
+
+        // Fetch and display leagues
+        fetch(`${API_BASE}/leagues`)
+            .then(response => response.json())
+            .then(leagues => {
+                const grid = document.getElementById('leaguesGrid');
+                leagues.forEach(league => {
+                    const card = document.createElement('div');
+                    card.className = 'logo-card';
+                    card.innerHTML = `
+                        <h3>${league.shortName} - ${league.region}</h3>
+                        <img src="${API_BASE}${league.logo}?t=${cacheBuster}"
+                             alt="${league.name}"
+                             onerror="this.style.border='2px solid red'">
+                        <div class="info">
+                            ${league.name}<br>
+                            Code: ${league.code}<br>
+                            Logo: ${league.logo}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading leagues:', error);
+                document.getElementById('leaguesGrid').innerHTML =
+                    '<p style="color: red;">Error loading leagues. Check console.</p>';
+            });
+
+        // Fetch and display tournaments
+        fetch(`${API_BASE}/tournaments`)
+            .then(response => response.json())
+            .then(tournaments => {
+                const grid = document.getElementById('tournamentsGrid');
+                tournaments.forEach(tournament => {
+                    const card = document.createElement('div');
+                    card.className = 'logo-card';
+                    card.innerHTML = `
+                        <h3>${tournament.shortName}</h3>
+                        <img src="${API_BASE}${tournament.logo}?t=${cacheBuster}"
+                             alt="${tournament.name}"
+                             onerror="this.style.border='2px solid red'">
+                        <div class="info">
+                            ${tournament.name}<br>
+                            ${tournament.location}<br>
+                            ${tournament.startDate} to ${tournament.endDate}<br>
+                            Logo: ${tournament.logo}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading tournaments:', error);
+                document.getElementById('tournamentsGrid').innerHTML =
+                    '<p style="color: red;">Error loading tournaments. Check console.</p>';
+            });
+    </script>
+</body>
+</html>

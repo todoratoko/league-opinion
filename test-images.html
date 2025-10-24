@@ -241,6 +241,63 @@
             color: #333;
             margin-bottom: 10px;
         }
+
+        /* Region Filter */
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filter-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .filter-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .filter-btn .count {
+            display: inline-block;
+            margin-left: 5px;
+            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-size: 0.85em;
+        }
+
+        .filter-btn.active .count {
+            background: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -249,6 +306,11 @@
 
         <div class="stats" id="stats">
             <h3>Loading...</h3>
+        </div>
+
+        <div class="filter-section" id="filter-section" style="display: none;">
+            <h3>🌍 Filter by Region</h3>
+            <div class="filter-buttons" id="filter-buttons"></div>
         </div>
 
         <div id="loading" class="loading">
@@ -271,6 +333,24 @@
     <script>
         const API_BASE = 'http://localhost:8081';
         let allTeams = [];
+        let currentFilter = 'All';
+        let filterType = 'league'; // 'league' or 'tournament'
+
+        // League information
+        const LEAGUE_INFO = {
+            'LCK': { emoji: '🇰🇷', name: 'LCK', fullName: 'Korea' },
+            'LPL': { emoji: '🇨🇳', name: 'LPL', fullName: 'China' },
+            'LEC': { emoji: '🇪🇺', name: 'LEC', fullName: 'Europe' },
+            'LTA': { emoji: '🌎', name: 'LTA', fullName: 'Americas' },
+            'LCP': { emoji: '🌏', name: 'LCP', fullName: 'Pacific' }
+        };
+
+        // Tournament information
+        const TOURNAMENT_INFO = {
+            'First Stand': { emoji: '⚔️', name: 'First Stand' },
+            'MSI 2025': { emoji: '🏆', name: 'MSI 2025' },
+            'Worlds 2025': { emoji: '👑', name: 'Worlds 2025' }
+        };
 
         // Load all teams
         async function loadTeams() {
@@ -288,6 +368,9 @@
                     <p><strong>${allTeams.length}</strong> Teams | <strong>${totalPlayers}</strong> Players</p>
                 `;
 
+                // Create filter buttons
+                createFilterButtons();
+
                 // Display teams
                 displayTeams(allTeams);
 
@@ -304,22 +387,128 @@
             }
         }
 
+        // Create filter buttons
+        function createFilterButtons() {
+            const filterSection = document.getElementById('filter-section');
+            const filterButtons = document.getElementById('filter-buttons');
+
+            // Count teams by league
+            const leagueCounts = { 'All': allTeams.length };
+            const tournamentCounts = {};
+
+            allTeams.forEach(team => {
+                // Count by league
+                if (team.league) {
+                    leagueCounts[team.league] = (leagueCounts[team.league] || 0) + 1;
+                }
+
+                // Count by tournament
+                if (team.tournaments) {
+                    team.tournaments.forEach(tournament => {
+                        tournamentCounts[tournament] = (tournamentCounts[tournament] || 0) + 1;
+                    });
+                }
+            });
+
+            // Create All Teams button
+            let buttonsHTML = `
+                <button class="filter-btn active" onclick="filterTeams('All', 'league')">
+                    🌍 All Teams <span class="count">${leagueCounts['All']}</span>
+                </button>
+            `;
+
+            // Add league buttons (LCK, LPL, LEC, LTA, LCP)
+            ['LCK', 'LPL', 'LEC', 'LTA', 'LCP'].forEach(league => {
+                const count = leagueCounts[league] || 0;
+                if (count > 0) {
+                    const info = LEAGUE_INFO[league];
+                    buttonsHTML += `
+                        <button class="filter-btn" onclick="filterTeams('${league}', 'league')">
+                            ${info.emoji} ${info.name} <span class="count">${count}</span>
+                        </button>
+                    `;
+                }
+            });
+
+            // Add separator
+            buttonsHTML += `<div style="width: 100%; height: 1px; background: #ddd; margin: 10px 0;"></div>`;
+
+            // Add tournament buttons
+            ['Worlds 2025', 'MSI 2025', 'First Stand'].forEach(tournament => {
+                const count = tournamentCounts[tournament] || 0;
+                if (count > 0) {
+                    const info = TOURNAMENT_INFO[tournament];
+                    buttonsHTML += `
+                        <button class="filter-btn" onclick="filterTeams('${tournament}', 'tournament')">
+                            ${info.emoji} ${info.name} <span class="count">${count}</span>
+                        </button>
+                    `;
+                }
+            });
+
+            filterButtons.innerHTML = buttonsHTML;
+            filterSection.style.display = 'block';
+        }
+
+        // Filter teams by league or tournament
+        function filterTeams(filter, type) {
+            currentFilter = filter;
+            filterType = type;
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.filter-btn').classList.add('active');
+
+            // Filter teams
+            let filteredTeams = allTeams;
+
+            if (filter !== 'All') {
+                if (type === 'league') {
+                    // Filter by league
+                    filteredTeams = allTeams.filter(team => team.league === filter);
+                } else if (type === 'tournament') {
+                    // Filter by tournament
+                    filteredTeams = allTeams.filter(team =>
+                        team.tournaments && team.tournaments.includes(filter)
+                    );
+                }
+            }
+
+            // Display filtered teams
+            displayTeams(filteredTeams);
+        }
+
         // Display teams in grid
         function displayTeams(teams) {
             const grid = document.getElementById('teams-grid');
-            grid.innerHTML = teams.map(team => `
-                <div class="team-card" onclick="showTeamDetail(${team.id})">
-                    <img
-                        src="${API_BASE}${team.image}"
-                        alt="${team.name}"
-                        class="team-logo"
-                        onerror="this.style.background='#f0f0f0'"
-                    />
-                    <div class="team-name">${team.fullName || team.name}</div>
-                    <div class="team-region">${team.region}</div>
-                    <span class="team-tag">${team.tag}</span>
-                </div>
-            `).join('');
+            const cacheBuster = new Date().getTime();
+
+            if (teams.length === 0) {
+                grid.innerHTML = '<div style="color: white; text-align: center; width: 100%; padding: 40px;">No teams found for this filter.</div>';
+                return;
+            }
+
+            grid.innerHTML = teams.map(team => {
+                const league = team.league || 'N/A';
+                const subRegion = team.subRegion || team.region;
+                const leagueEmoji = LEAGUE_INFO[league]?.emoji || '🌍';
+
+                return `
+                    <div class="team-card" onclick="showTeamDetail(${team.id})">
+                        <img
+                            src="${API_BASE}${team.image}?t=${cacheBuster}"
+                            alt="${team.name}"
+                            class="team-logo"
+                            onerror="this.style.background='#f0f0f0'"
+                        />
+                        <div class="team-name">${team.fullName || team.name}</div>
+                        <div class="team-region">${leagueEmoji} ${league} • ${subRegion}</div>
+                        <span class="team-tag">${team.tag}</span>
+                    </div>
+                `;
+            }).join('');
         }
 
         // Show team detail in modal
@@ -328,11 +517,12 @@
                 const response = await fetch(`${API_BASE}/teams/${teamId}`);
                 const team = await response.json();
 
+                const cacheBuster = new Date().getTime();
                 const modalBody = document.getElementById('modal-body');
                 modalBody.innerHTML = `
                     <div class="team-header">
                         <img
-                            src="${API_BASE}${team.image}"
+                            src="${API_BASE}${team.image}?t=${cacheBuster}"
                             alt="${team.name}"
                             class="team-logo-large"
                         />
@@ -350,7 +540,7 @@
                             ${(team.players || []).map(player => `
                                 <div class="player-card">
                                     <img
-                                        src="${API_BASE}${player.image}"
+                                        src="${API_BASE}${player.image}?t=${cacheBuster}"
                                         alt="${player.name}"
                                         class="player-photo"
                                     />

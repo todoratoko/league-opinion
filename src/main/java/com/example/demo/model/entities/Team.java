@@ -23,9 +23,17 @@ public class Team {
     @Column
     private String tag;  // Team tag/code
     @Column
-    private String region;  // Region string
+    private String region;  // Region string (old field, kept for compatibility)
     @Column
     private String country;  // Country name
+    @Column
+    private String league;  // League code (LCK, LPL, LEC, LTA, LCP)
+    @Column
+    private String leagueFullName;  // Full league name
+    @Column
+    private String subRegion;  // Sub-region (Korea, China, North America, etc.)
+    @Column(columnDefinition = "text[]")
+    private String[] tournaments;  // Tournaments participated in
     @Column
     private String image;  // Team logo URL
     @Column

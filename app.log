@@ -1426,3 +1426,1110 @@ Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
 Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
 Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
 Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinion_saves os1_0 join opinions o1_0 on o1_0.id=os1_0.opinion_id where os1_0.user_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinion_saves os1_0 join opinions o1_0 on o1_0.id=os1_0.opinion_id where os1_0.user_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+2025-10-23T17:07:06.637+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m28s907ms).
+2025-10-23T17:11:18.633+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m41s938ms).
+2025-10-23T17:25:15.058+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m56s426ms).
+2025-10-23T18:48:13.473+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h22m58s414ms).
+2025-10-23T19:05:35.796+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m22s324ms).
+2025-10-23T20:06:54.501+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h1m18s704ms).
+2025-10-23T20:36:59.633+03:00  WARN 69210 --- [demo] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=30m5s134ms).
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinion_saves os1_0 join opinions o1_0 on o1_0.id=os1_0.opinion_id where os1_0.user_id=?
+2025-10-23T20:44:03.144+03:00  WARN 69210 --- [demo] [nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@7896aaf2 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2025-10-23T20:44:03.144+03:00  WARN 69210 --- [demo] [io-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@3a8fe0d3 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+2025-10-23T20:44:08.938+03:00  WARN 69210 --- [demo] [nio-8081-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@4370a647 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+2025-10-23T20:44:09.726+03:00  WARN 69210 --- [demo] [nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@5817f1ca (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0
+2025-10-23T20:44:09.775+03:00  WARN 69210 --- [demo] [nio-8081-exec-2] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@66e436b2 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:341)
+	at org.apache.catalina.connector.OutputBuffer.flushByteBuffer(OutputBuffer.java:776)
+	at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:673)
+	at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:376)
+	at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:354)
+	at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:103)
+	at org.springframework.util.StreamUtils$NonClosingOutputStream.write(StreamUtils.java:264)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2203)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.writeNumber(UTF8JsonGenerator.java:1003)
+	at com.fasterxml.jackson.databind.ser.std.NumberSerializers$LongSerializer.serialize(NumberSerializers.java:199)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:772)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:178)
+	at com.fasterxml.jackson.databind.ser.std.CollectionSerializer.serializeContents(CollectionSerializer.java:145)
+	at com.fasterxml.jackson.databind.ser.std.CollectionSerializer.serialize(CollectionSerializer.java:107)
+	at com.fasterxml.jackson.databind.ser.std.CollectionSerializer.serialize(CollectionSerializer.java:25)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:479)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:399)
+	at com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1568)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1061)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:483)
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:297)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.handleReturnValue(RequestResponseBodyMethodProcessor.java:192)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78)
+	at org.springframework.hateoas.server.mvc.RepresentationModelProcessorHandlerMethodReturnValueHandler.handleReturnValue(RepresentationModelProcessorHandlerMethodReturnValueHandler.java:108)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+	Suppressed: org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe
+		at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:341)
+		at org.apache.catalina.connector.OutputBuffer.flushByteBuffer(OutputBuffer.java:776)
+		at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:673)
+		at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:376)
+		at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:354)
+		at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:103)
+		at org.springframework.util.StreamUtils$NonClosingOutputStream.write(StreamUtils.java:264)
+		at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2203)
+		at com.fasterxml.jackson.core.json.UTF8JsonGenerator.close(UTF8JsonGenerator.java:1227)
+		at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:452)
+		... 54 more
+	Caused by: java.io.IOException: Broken pipe
+		at java.base/sun.nio.ch.FileDispatcherImpl.write0(Native Method)
+		at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:62)
+		at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:132)
+		at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:97)
+		at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:53)
+		at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:532)
+		at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:118)
+		at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1373)
+		at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:764)
+		at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:589)
+		at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:533)
+		at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:540)
+		at org.apache.coyote.http11.filters.ChunkedOutputFilter.doWrite(ChunkedOutputFilter.java:110)
+		at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:193)
+		at org.apache.coyote.Response.doWrite(Response.java:618)
+		at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:329)
+		... 63 more
+Caused by: java.io.IOException: Broken pipe
+	at java.base/sun.nio.ch.FileDispatcherImpl.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:132)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:97)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:53)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:532)
+	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:118)
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1373)
+	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:764)
+	at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:589)
+	at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:533)
+	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:540)
+	at org.apache.coyote.http11.filters.ChunkedOutputFilter.doWrite(ChunkedOutputFilter.java:112)
+	at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:193)
+	at org.apache.coyote.Response.doWrite(Response.java:618)
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:329)
+	... 74 more
+2025-10-23T20:44:13.159+03:00  WARN 69210 --- [demo] [nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@61ae34dc (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2025-10-23T20:44:13.166+03:00  WARN 69210 --- [demo] [io-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@6dca49d8 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+2025-10-23T20:44:14.153+03:00  WARN 69210 --- [demo] [nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@b463e18 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2025-10-23T20:44:14.153+03:00  WARN 69210 --- [demo] [nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@1eaed73a (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+2025-10-23T20:44:14.153+03:00  WARN 69210 --- [demo] [nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@249475ee (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinion_saves os1_0 join opinions o1_0 on o1_0.id=os1_0.opinion_id where os1_0.user_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinion_saves os1_0 join opinions o1_0 on o1_0.id=os1_0.opinion_id where os1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 left join users_follow_users f1_0 on u1_0.id=f1_0.user_id left join users f1_1 on f1_1.id=f1_0.following_id where u1_0.id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0 left join users o2_0 on o2_0.id=o1_0.user_id where o2_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select o1_0.user_id,o1_0.id,o1_0.comment,o1_0.created_at,g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0 left join games g1_0 on g1_0.id=o1_0.game_id left join regions r1_0 on r1_0.id=g1_0.region_id where o1_0.user_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.following_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.user_id where f1_0.following_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.is_enabled,u1_0.last_login,u1_0.login_attempts,u1_0.password,u1_0.profile_image,u1_0.username from users u1_0 where u1_0.username=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select o1_0.id,o1_0.comment,o1_0.created_at,o1_0.game_id,o1_0.user_id,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0 left join users o2_0 on o2_0.id=o1_0.user_id where o2_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 left join regions r1_0 on r1_0.id=g1_0.region_id where g1_0.id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select f1_0.user_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.following_id where f1_0.user_id=?
+Hibernate: select o1_0.user_id,o1_0.id,o1_0.comment,o1_0.created_at,g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,r1_0.id,r1_0.code,r1_0.name,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament,o1_0.team_one_percent,o1_0.team_two_percent from opinions o1_0 left join games g1_0 on g1_0.id=o1_0.game_id left join regions r1_0 on r1_0.id=g1_0.region_id where o1_0.user_id=?
+Hibernate: select f1_0.following_id,f1_1.id,f1_1.created_at,f1_1.email,f1_1.is_enabled,f1_1.last_login,f1_1.login_attempts,f1_1.password,f1_1.profile_image,f1_1.username from users_follow_users f1_0 join users f1_1 on f1_1.id=f1_0.user_id where f1_0.following_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0 where r1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select g1_0.id,g1_0.is_finished,g1_0.match_start_date_time,g1_0.match_type,g1_0.region_id,g1_0.team_one_id,g1_0.team_one_percent,g1_0.team_one_score,g1_0.team_two_id,g1_0.team_two_percent,g1_0.team_two_score,g1_0.tournament from games g1_0 where g1_0.team_one_id=? or g1_0.team_two_id=? order by g1_0.match_start_date_time desc
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select r1_0.id,r1_0.code,r1_0.name from regions r1_0
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0 left join players p1_0 on t1_0.id=p1_0.team_id where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.country,t1_0.full_name,t1_0.image,t1_0.name,t1_0.region,t1_0.tag,t1_0.twitter from teams t1_0
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+Hibernate: select p1_0.team_id,p1_0.id,p1_0.image,p1_0.name,p1_0.nickname,p1_0.role from players p1_0 where p1_0.team_id=?
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  04:30 h
+[INFO] Finished at: 2025-10-23T21:26:03+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.5:run (default-cli) on project demo: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
