@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RepositoryRestResource(exported = false)
 public interface TeamRepository extends JpaRepository<Team, Long> {
+    Team findByPandascoreTeamId(Long pandascoreTeamId);
 }

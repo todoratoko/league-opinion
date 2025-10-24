@@ -25,4 +25,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     // Find finished games for a team
     @Query("SELECT g FROM Game g WHERE (g.teamOneId = :teamId OR g.teamTwoId = :teamId) AND g.isFinished = true ORDER BY g.matchStartDateTime DESC")
     List<Game> findFinishedGamesByTeamId(@Param("teamId") int teamId);
+
+    // Find game by PandaScore match ID
+    Game findByPandascoreMatchId(Long pandascoreMatchId);
 }

@@ -38,6 +38,8 @@ public class Team {
     private String image;  // Team logo URL
     @Column
     private String twitter;  // Twitter handle
+    @Column(name = "pandascore_team_id", unique = true)
+    private Long pandascoreTeamId;  // PandaScore team ID for syncing
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Player> players;

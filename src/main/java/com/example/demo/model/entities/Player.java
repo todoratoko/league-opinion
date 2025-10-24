@@ -21,6 +21,14 @@ public class Player {
     private String role;  // Top, Jungle, Mid, ADC, Support
     @Column
     private String image;  // Player image URL
+    @Column(name = "pandascore_player_id", unique = true)
+    private Long pandascorePlayerId;  // PandaScore player ID for syncing
+    @Column
+    private String firstName;  // Player's first name
+    @Column
+    private String lastName;  // Player's last name
+    @Column
+    private String nationality;  // Player's nationality (country code)
     @ManyToOne
     @JoinColumn(name = "team_id")
     @JsonBackReference
