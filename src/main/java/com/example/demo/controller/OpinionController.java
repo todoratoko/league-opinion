@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.AddOpinionDTO;
+import com.example.demo.model.dto.CreateOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.model.dto.ResponseMessage;
 import com.example.demo.model.entities.User;
@@ -52,6 +53,15 @@ public class OpinionController extends BaseController{
     public List<OpinionWithOwnerDTO> getOpinionsByRegion(@PathVariable Long regionId) {
         return opinionService.getOpinionsByRegionId(regionId);
     }
+
+    @PostMapping("/opinions")
+    public OpinionWithOwnerDTO createOpinion(@Valid @RequestBody CreateOpinionDTO createOpinionDTO,
+                                             HttpServletRequest request,
+                                             HttpServletResponse response) {
+        Long userId = getUserIdFromSessionOrToken(null, request);
+        return opinionService.createOpinion(createOpinionDTO, userId, request, response);
+    }
+
     @PostMapping("/match/opinions/{matchId}")
     public OpinionWithOwnerDTO add(@Valid @RequestBody AddOpinionDTO opinion, @PathVariable long matchId, HttpSession session, HttpServletRequest request, HttpServletResponse response){
         validateLogin(session, request);
@@ -72,7 +82,7 @@ public class OpinionController extends BaseController{
 
     private Long getUserIdFromSessionOrToken(HttpSession session, HttpServletRequest request) {
         // Try to get user ID from session first (backward compatibility)
-        if (!session.isNew() && session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED))) {
+        if (session != null && !session.isNew() && session.getAttribute(LOGGED) != null && ((Boolean) session.getAttribute(LOGGED))) {
             Long userId = (Long) session.getAttribute(UserController.USER_ID);
             if (userId != null) {
                 return userId;

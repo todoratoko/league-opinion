@@ -5,6 +5,7 @@ import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.exceptions.UnauthorizedException;
 import com.example.demo.model.dto.ResponseMessage;
 import com.example.demo.model.dto.AddOpinionDTO;
+import com.example.demo.model.dto.CreateOpinionDTO;
 import com.example.demo.model.dto.OpinionWithOwnerDTO;
 import com.example.demo.model.entities.Game;
 import com.example.demo.model.entities.Opinion;
@@ -20,6 +21,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -149,6 +151,42 @@ public class OpinionService {
         opinionSaveRepository.delete(opinionSave);
 
         return new ResponseMessage("Opinion unsaved successfully");
+    }
+
+    public OpinionWithOwnerDTO createOpinion(CreateOpinionDTO createOpinionDTO, Long userId, HttpServletRequest request, HttpServletResponse response) {
+        checkAndRenewToken(request, response);
+
+        // Validate percentages add up to 100
+        if (createOpinionDTO.getTeamOnePercent() + createOpinionDTO.getTeamTwoPercent() != 100) {
+            throw new BadRequestException("Team percentages must add up to 100");
+        }
+
+        // Find the game
+        Game game = gameRepository.findById(createOpinionDTO.getGameId())
+                .orElseThrow(() -> new NotFoundException("Game not found with ID: " + createOpinionDTO.getGameId()));
+
+        // Find the user
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        // Create the opinion
+        Opinion opinion = new Opinion();
+        opinion.setGame(game);
+        opinion.setOwner(user);
+        opinion.setTeamOnePercent(createOpinionDTO.getTeamOnePercent());
+        opinion.setTeamTwoPercent(createOpinionDTO.getTeamTwoPercent());
+        opinion.setComment(createOpinionDTO.getComment());
+        opinion.setCreatedAt(new Date());
+
+        // Save the opinion
+        Opinion savedOpinion = opinionRepository.save(opinion);
+
+        // Add to user's opinions list
+        user.getOpinions().add(savedOpinion);
+        userRepository.save(user);
+
+        // Map to DTO and return
+        return modelMapper.map(savedOpinion, OpinionWithOwnerDTO.class);
     }
 
 }
