@@ -1,0 +1,13 @@
+target/
+!target/demo-0.0.1-SNAPSHOT.jar
+.mvn/
+.git/
+.gitignore
+*.md
+*.log
+.DS_Store
+.idea/
+*.iml
+node_modules/
+scripts/venv/
+scripts/__pycache__/
