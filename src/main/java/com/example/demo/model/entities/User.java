@@ -32,6 +32,16 @@ public class User {
     private Integer loginAttempts; //ToDo
     @Column(name = "is_enabled")
     private boolean isEnabled;
+
+    @Column(name = "portfolio_size")
+    private Double portfolioSize;  // Amount of money in user's account
+
+    @Column(name = "min_edge")
+    private Double minEdge;  // Minimum edge threshold as percentage (e.g., 5.0 for 5%)
+
+    @Column(name = "min_win")
+    private Double minWin;  // Minimum win as percentage of portfolio (e.g., 2.0 for 2%)
+
     @OneToMany(mappedBy = "owner")
     private Set<Opinion> opinions;
 

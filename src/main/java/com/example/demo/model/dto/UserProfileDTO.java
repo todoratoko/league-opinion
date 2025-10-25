@@ -17,6 +17,9 @@ public class UserProfileDTO {
     private String profileImage;
     private LocalDateTime createdAt;
     private UserStatisticsDTO statistics;
+    private Double portfolioSize;  // Only included for own profile
+    private Double minEdge;  // Only included for own profile
+    private Double minWin;  // Only included for own profile
 
     @JsonProperty("isFollowing")
     private boolean isFollowing;  // Whether the current user is following this profile

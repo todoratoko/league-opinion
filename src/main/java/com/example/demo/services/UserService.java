@@ -166,10 +166,13 @@ public class UserService {
         dto.setProfileImage(user.getProfileImage());
         dto.setCreatedAt(user.getCreatedAt());
 
-        // Only include email if viewing own profile
+        // Only include email, portfolioSize, minEdge, and minWin if viewing own profile
         Long loggedUserId = (Long) request.getSession().getAttribute(USER_ID);
         if (loggedUserId != null && loggedUserId == id) {
             dto.setEmail(user.getEmail());
+            dto.setPortfolioSize(user.getPortfolioSize());
+            dto.setMinEdge(user.getMinEdge());
+            dto.setMinWin(user.getMinWin());
         }
 
         // Check if current user is following this profile
@@ -189,6 +192,57 @@ public class UserService {
         dto.setStatistics(statistics);
 
         return dto;
+    }
+
+    /**
+     * Update user's portfolio settings
+     * @param userId The user's ID
+     * @param portfolioSize The new portfolio size
+     * @param minEdge The new minimum edge threshold
+     * @param minWin The new minimum win percentage
+     * @param request The HTTP request for validation
+     * @param response The HTTP response for token renewal
+     * @return Updated user
+     */
+    public User updatePortfolioSettings(Long userId, Double portfolioSize, Double minEdge, Double minWin,
+                                       HttpServletRequest request, HttpServletResponse response) {
+        // Validate authentication
+        validateLogin(request);
+        checkAndRenewToken(request, response);
+
+        // Verify the logged-in user is updating their own portfolio
+        Long loggedUserId = (Long) request.getSession().getAttribute(USER_ID);
+        if (loggedUserId == null || !loggedUserId.equals(userId)) {
+            throw new UnauthorizedException("You can only update your own portfolio settings");
+        }
+
+        // Validate input
+        if (portfolioSize == null) {
+            throw new BadRequestException("Portfolio size is required");
+        }
+        if (portfolioSize < 0) {
+            throw new BadRequestException("Portfolio size must be non-negative");
+        }
+        if (minEdge == null) {
+            throw new BadRequestException("Minimum edge is required");
+        }
+        if (minEdge < 0 || minEdge > 100) {
+            throw new BadRequestException("Minimum edge must be between 0 and 100");
+        }
+        if (minWin == null) {
+            throw new BadRequestException("Minimum win is required");
+        }
+        if (minWin < 0 || minWin > 100) {
+            throw new BadRequestException("Minimum win must be between 0 and 100");
+        }
+
+        // Get and update user
+        User user = getUserById(userId);
+        user.setPortfolioSize(portfolioSize);
+        user.setMinEdge(minEdge);
+        user.setMinWin(minWin);
+
+        return userRepository.save(user);
     }
 
     private UserStatisticsDTO calculateUserStatistics(User user) {

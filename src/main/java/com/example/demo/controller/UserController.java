@@ -60,6 +60,32 @@ public class UserController extends BaseController {
         return ResponseEntity.ok(userService.getUserProfile(id, request));
     }
 
+    // PUT /users/{id}/portfolio - Update user portfolio settings
+    @PutMapping("/users/{id}/portfolio")
+    public ResponseEntity<UserResponseDTO> updatePortfolioSettings(
+            @PathVariable long id,
+            @RequestBody PortfolioSettingsRequest portfolioRequest,
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        User updatedUser = userService.updatePortfolioSettings(
+                id,
+                portfolioRequest.getPortfolioSize(),
+                portfolioRequest.getMinEdge(),
+                portfolioRequest.getMinWin(),
+                request,
+                response
+        );
+        UserResponseDTO dto = new UserResponseDTO();
+        dto.setId(updatedUser.getId());
+        dto.setUsername(updatedUser.getUsername());
+        dto.setEmail(updatedUser.getEmail());
+        dto.setProfileImage(updatedUser.getProfileImage());
+        dto.setPortfolioSize(updatedUser.getPortfolioSize());
+        dto.setMinEdge(updatedUser.getMinEdge());
+        dto.setMinWin(updatedUser.getMinWin());
+        return ResponseEntity.ok(dto);
+    }
+
     //add get all users
 
     @PutMapping("/users/edit/{id}")
