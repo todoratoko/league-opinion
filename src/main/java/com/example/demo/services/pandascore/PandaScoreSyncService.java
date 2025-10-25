@@ -308,11 +308,25 @@ public class PandaScoreSyncService {
             game.setIsFinished("finished".equalsIgnoreCase(pandaMatch.getStatus()));
 
             // Update scores if match is finished
-            if (pandaMatch.getResults() != null && game.getIsFinished()) {
-                // Note: PandaScore returns results as a list, we need to map them to team scores
-                // This is a simplified version - you might need to enhance this
-                game.setTeamOneScore(0);
-                game.setTeamTwoScore(0);
+            if (pandaMatch.getResults() != null && !pandaMatch.getResults().isEmpty() && game.getIsFinished()) {
+                // Extract scores from results and match them to teams
+                for (PandaScoreResults result : pandaMatch.getResults()) {
+                    if (result.getTeamId() == null || result.getScore() == null) {
+                        continue;
+                    }
+
+                    // Match result team ID with game teams
+                    if (result.getTeamId() == game.getTeamOneId()) {
+                        game.setTeamOneScore(result.getScore());
+                        logger.debug("Set team one score: {}", result.getScore());
+                    } else if (result.getTeamId() == game.getTeamTwoId()) {
+                        game.setTeamTwoScore(result.getScore());
+                        logger.debug("Set team two score: {}", result.getScore());
+                    }
+                }
+
+                logger.info("Updated match {} results: {} - {} (PandaScore ID: {})",
+                        game.getId(), game.getTeamOneScore(), game.getTeamTwoScore(), pandaMatch.getId());
             }
 
             gameRepository.save(game);

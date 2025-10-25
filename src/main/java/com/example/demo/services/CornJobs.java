@@ -79,6 +79,21 @@ public class CornJobs {
         }
     }
 
+    /**
+     * Sync past (finished) matches from PandaScore to update final scores
+     * Runs every 30 minutes to capture results of recently finished games
+     */
+    @Scheduled(fixedDelay = 1000 * 60 * 30)  // Every 30 minutes
+    public void syncFinishedMatches() {
+        logger.info("Starting scheduled sync of past matches from PandaScore");
+        try {
+            int synced = pandaScoreSyncService.syncPastMatches(7);  // Sync last 7 days
+            logger.info("Scheduled past matches sync completed: {} matches synced", synced);
+        } catch (Exception e) {
+            logger.error("Error during scheduled past matches sync", e);
+        }
+    }
+
     //ToDo
 
 //        @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)

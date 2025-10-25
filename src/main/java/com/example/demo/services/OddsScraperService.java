@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -326,6 +327,211 @@ public class OddsScraperService {
     }
 
     /**
+     * Execute the Python results scraper and return finished matches with scores
+     */
+    public List<ScrapedResult> scrapeResults() {
+        List<ScrapedResult> scrapedResults = new ArrayList<>();
+
+        try {
+            // Get project root directory
+            String projectRoot = System.getProperty("user.dir");
+            String scriptPath = projectRoot + "/scripts/scrape_liquipedia.py";
+
+            File scriptFile = new File(scriptPath);
+            if (!scriptFile.exists()) {
+                logger.error("Python results scraper script not found at: {}", scriptPath);
+                return scrapedResults;
+            }
+
+            // Execute Python script using venv
+            String venvPython = projectRoot + "/scripts/venv/bin/python3";
+            File venvPythonFile = new File(venvPython);
+
+            // Use venv python if it exists, otherwise fall back to system python3
+            String pythonCmd = venvPythonFile.exists() ? venvPython : "python3";
+
+            ProcessBuilder processBuilder = new ProcessBuilder(pythonCmd, scriptPath);
+            processBuilder.directory(new File(projectRoot));
+            processBuilder.redirectErrorStream(false);
+
+            logger.info("Executing results scraper: {}", scriptPath);
+            Process process = processBuilder.start();
+
+            // Read stdout (JSON output)
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line);
+            }
+
+            // Read stderr (logs)
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            while ((line = errorReader.readLine()) != null) {
+                logger.debug("Results scraper log: {}", line);
+            }
+
+            int exitCode = process.waitFor();
+            logger.info("Results scraper exit code: {}", exitCode);
+
+            if (exitCode == 0 && output.length() > 0) {
+                // Parse JSON response
+                JsonNode result = objectMapper.readTree(output.toString());
+
+                if (result.has("success") && result.get("success").asBoolean()) {
+                    JsonNode results = result.get("results");
+                    if (results != null && results.isArray()) {
+                        for (JsonNode resultNode : results) {
+                            ScrapedResult scrapedResult = new ScrapedResult();
+                            scrapedResult.setTeam1(resultNode.get("team1").asText());
+                            scrapedResult.setTeam2(resultNode.get("team2").asText());
+                            scrapedResult.setTeam1Score(resultNode.get("team1Score").asInt());
+                            scrapedResult.setTeam2Score(resultNode.get("team2Score").asInt());
+                            scrapedResult.setScrapedAt(resultNode.get("scrapedAt").asText());
+
+                            // Extract matchDateTime if available
+                            if (resultNode.has("matchDateTime")) {
+                                scrapedResult.setMatchDateTime(resultNode.get("matchDateTime").asText());
+                            }
+
+                            scrapedResults.add(scrapedResult);
+                        }
+                        logger.info("Successfully scraped {} match results", scrapedResults.size());
+                    }
+                } else {
+                    logger.error("Results scraper returned unsuccessful result: {}", result);
+                }
+            } else {
+                logger.error("Results scraper execution failed with exit code: {}", exitCode);
+            }
+
+        } catch (Exception e) {
+            logger.error("Error executing results scraper: {}", e.getMessage(), e);
+        }
+
+        return scrapedResults;
+    }
+
+    /**
+     * Update database with scraped match results
+     */
+    @Transactional
+    public int updateResultsInDatabase(List<ScrapedResult> scrapedResults) {
+        int updated = 0;
+
+        for (ScrapedResult scrapedResult : scrapedResults) {
+            try {
+                // Find matching teams by name
+                List<Team> team1Options = findTeamByName(scrapedResult.getTeam1());
+                List<Team> team2Options = findTeamByName(scrapedResult.getTeam2());
+
+                if (!team1Options.isEmpty() && !team2Options.isEmpty()) {
+                    Team team1 = team1Options.get(0);
+                    Team team2 = team2Options.get(0);
+
+                    // Try to find existing games between these teams
+                    List<Game> games = gameRepository.findHeadToHeadMatches(
+                            (int) team1.getId(),
+                            (int) team2.getId()
+                    );
+
+                    boolean gameUpdated = false;
+
+                    // Try to update existing game
+                    for (Game game : games) {
+                        // Update if not already finished with scores, or if scores are missing
+                        if (game.getTeamOneScore() == null || game.getTeamTwoScore() == null) {
+                            // Match the scraped teams to the correct game teams
+                            boolean team1IsTeamOne = (game.getTeamOneId() == team1.getId());
+
+                            if (team1IsTeamOne) {
+                                // Scraped team1 matches game's teamOne
+                                game.setTeamOneScore(scrapedResult.getTeam1Score());
+                                game.setTeamTwoScore(scrapedResult.getTeam2Score());
+                            } else {
+                                // Scraped team1 matches game's teamTwo (swapped)
+                                game.setTeamOneScore(scrapedResult.getTeam2Score());
+                                game.setTeamTwoScore(scrapedResult.getTeam1Score());
+                            }
+
+                            // Mark as finished
+                            game.setIsFinished(true);
+                            game.setMatchStatus("finished");
+
+                            // Set match date/time if available
+                            if (scrapedResult.getMatchDateTime() != null && !scrapedResult.getMatchDateTime().isEmpty()) {
+                                game.setMatchStartDateTime(scrapedResult.getMatchDateTime());
+                                logger.debug("Updated match date to: {}", scrapedResult.getMatchDateTime());
+                            }
+
+                            gameRepository.save(game);
+                            updated++;
+                            gameUpdated = true;
+                            logger.info("Updated result for match: {} vs {} - Game[{} {} - {} {}]",
+                                    scrapedResult.getTeam1(), scrapedResult.getTeam2(),
+                                    team1.getName(), game.getTeamOneScore(),
+                                    game.getTeamTwoScore(), team2.getName());
+                            break; // Only update the first matching game
+                        }
+                    }
+
+                    // If no existing game found, create a new one
+                    if (!gameUpdated) {
+                        Game newGame = new Game();
+                        newGame.setTeamOneId((int) team1.getId());
+                        newGame.setTeamTwoId((int) team2.getId());
+                        newGame.setTeamOneScore(scrapedResult.getTeam1Score());
+                        newGame.setTeamTwoScore(scrapedResult.getTeam2Score());
+                        newGame.setIsFinished(true);
+                        newGame.setMatchStatus("finished");
+
+                        // Set match date/time if available
+                        if (scrapedResult.getMatchDateTime() != null && !scrapedResult.getMatchDateTime().isEmpty()) {
+                            newGame.setMatchStartDateTime(scrapedResult.getMatchDateTime());
+                            logger.debug("Set match date to: {}", scrapedResult.getMatchDateTime());
+                        }
+
+                        gameRepository.save(newGame);
+                        updated++;
+                        logger.info("Created new finished match: {} vs {} ({}-{}) at {}",
+                                team1.getName(), team2.getName(),
+                                scrapedResult.getTeam1Score(), scrapedResult.getTeam2Score(),
+                                newGame.getMatchStartDateTime());
+                    }
+                } else {
+                    logger.debug("Could not find teams in database for result: {} vs {}",
+                            scrapedResult.getTeam1(), scrapedResult.getTeam2());
+                }
+
+            } catch (Exception e) {
+                logger.error("Error updating result for match {} vs {}: {}",
+                        scrapedResult.getTeam1(), scrapedResult.getTeam2(), e.getMessage());
+            }
+        }
+
+        return updated;
+    }
+
+    /**
+     * Run full results scraping and update cycle
+     */
+    public int scrapeAndUpdateResults() {
+        logger.info("Starting results scrape and update cycle");
+
+        List<ScrapedResult> scrapedResults = scrapeResults();
+
+        if (scrapedResults.isEmpty()) {
+            logger.warn("No results scraped, skipping database update");
+            return 0;
+        }
+
+        int updated = updateResultsInDatabase(scrapedResults);
+        logger.info("Results update complete: {} matches updated", updated);
+
+        return updated;
+    }
+
+    /**
      * Inner class for scraped match data
      */
     public static class ScrapedMatch {
@@ -350,5 +556,36 @@ public class OddsScraperService {
 
         public String getScrapedAt() { return scrapedAt; }
         public void setScrapedAt(String scrapedAt) { this.scrapedAt = scrapedAt; }
+    }
+
+    /**
+     * Inner class for scraped match results
+     */
+    public static class ScrapedResult {
+        private String team1;
+        private String team2;
+        private Integer team1Score;
+        private Integer team2Score;
+        private String scrapedAt;
+        private String matchDateTime;
+
+        // Getters and setters
+        public String getTeam1() { return team1; }
+        public void setTeam1(String team1) { this.team1 = team1; }
+
+        public String getTeam2() { return team2; }
+        public void setTeam2(String team2) { this.team2 = team2; }
+
+        public Integer getTeam1Score() { return team1Score; }
+        public void setTeam1Score(Integer team1Score) { this.team1Score = team1Score; }
+
+        public Integer getTeam2Score() { return team2Score; }
+        public void setTeam2Score(Integer team2Score) { this.team2Score = team2Score; }
+
+        public String getScrapedAt() { return scrapedAt; }
+        public void setScrapedAt(String scrapedAt) { this.scrapedAt = scrapedAt; }
+
+        public String getMatchDateTime() { return matchDateTime; }
+        public void setMatchDateTime(String matchDateTime) { this.matchDateTime = matchDateTime; }
     }
 }
