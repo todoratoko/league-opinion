@@ -30,4 +30,12 @@ public class GameService {
     public List<Game> getAllGames() {
         return gameRepository.findAll();
     }
+
+    /**
+     * Get all currently running (live) games
+     * @return List of games with status "running"
+     */
+    public List<Game> getRunningGames() {
+        return gameRepository.findRunningGames();
+    }
 }

@@ -64,6 +64,21 @@ public class CornJobs {
         }
     }
 
+    /**
+     * Sync currently running (live) matches from PandaScore
+     * Runs every 2 minutes to keep live game status up to date
+     */
+    @Scheduled(fixedDelay = 1000 * 60 * 2)  // Every 2 minutes
+    public void syncRunningMatches() {
+        logger.info("Starting scheduled sync of running matches from PandaScore");
+        try {
+            int synced = pandaScoreSyncService.syncRunningMatches();
+            logger.info("Scheduled running matches sync completed: {} matches synced", synced);
+        } catch (Exception e) {
+            logger.error("Error during scheduled running matches sync", e);
+        }
+    }
+
     //ToDo
 
 //        @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)

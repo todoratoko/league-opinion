@@ -38,4 +38,14 @@ public class GameController {
         List<Game> games = gameService.getGamesByRegionId(regionId);
         return ResponseEntity.ok(games);
     }
+
+    /**
+     * Get all currently running (live) games
+     * @return List of games with status "running"
+     */
+    @GetMapping("/games/live")
+    public ResponseEntity<List<Game>> getLiveGames() {
+        List<Game> liveGames = gameService.getRunningGames();
+        return ResponseEntity.ok(liveGames);
+    }
 }

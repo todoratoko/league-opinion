@@ -106,6 +106,36 @@ public class PandaScoreSyncService {
     }
 
     /**
+     * Sync currently running matches from PandaScore to the database
+     * @return Number of running matches synced
+     */
+    @Transactional
+    public int syncRunningMatches() {
+        logger.info("Starting sync of running matches");
+
+        List<PandaScoreMatch> matches = pandaScoreApiService.getRunningMatches();
+
+        if (matches == null || matches.isEmpty()) {
+            logger.info("No running matches found from PandaScore");
+            return 0;
+        }
+
+        int synced = 0;
+        for (PandaScoreMatch match : matches) {
+            try {
+                if (syncMatch(match)) {
+                    synced++;
+                }
+            } catch (Exception e) {
+                logger.error("Error syncing running match {}: {}", match.getId(), e.getMessage(), e);
+            }
+        }
+
+        logger.info("Successfully synced {} out of {} running matches", synced, matches.size());
+        return synced;
+    }
+
+    /**
      * Sync all teams for a specific league
      * @param leagueName The league name (e.g., "LCK", "LEC", "MSI")
      * @return Number of teams synced
