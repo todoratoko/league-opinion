@@ -39,3 +39,10 @@ build/
 **/application-cloud.properties
 .env.local
 .env.production
+
+### Python ###
+scripts/venv/
+scripts/__pycache__/
+scripts/*.pyc
+*.py[cod]
+*$py.class

@@ -1,8 +1,6 @@
 package com.example.demo.services.pandascore;
 
-import com.example.demo.services.pandascore.dto.PandaScoreMatch;
-import com.example.demo.services.pandascore.dto.PandaScoreOpponent;
-import com.example.demo.services.pandascore.dto.PandaScoreTeam;
+import com.example.demo.services.pandascore.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -207,6 +205,34 @@ public class PandaScoreApiService {
 
         } catch (Exception e) {
             logger.error("Exception while fetching teams for league {}", leagueName, e);
+            return List.of();
+        }
+    }
+
+    /**
+     * Fetch betting odds for a specific match
+     * NOTE: This requires a premium PandaScore subscription (Odds API access)
+     * @param matchId The PandaScore match ID
+     * @return List of odds for different markets, or empty list if not available
+     */
+    public List<PandaScoreOdds> getMatchOdds(Long matchId) {
+        logger.info("Fetching odds for match: {}", matchId);
+
+        try {
+            return webClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/lol/matches/{id}/odds")
+                            .build(matchId))
+                    .retrieve()
+                    .bodyToMono(new ParameterizedTypeReference<List<PandaScoreOdds>>() {})
+                    .onErrorResume(error -> {
+                        logger.debug("Odds not available for match {} (may require premium subscription): {}",
+                                matchId, error.getMessage());
+                        return Mono.just(List.of());
+                    })
+                    .block();
+        } catch (Exception e) {
+            logger.debug("Exception while fetching odds for match {} (odds API may not be enabled)", matchId);
             return List.of();
         }
     }

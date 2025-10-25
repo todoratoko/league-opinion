@@ -8,10 +8,7 @@ import com.example.demo.model.repositories.GameRepository;
 import com.example.demo.model.repositories.PlayerRepository;
 import com.example.demo.model.repositories.RegionRepository;
 import com.example.demo.model.repositories.TeamRepository;
-import com.example.demo.services.pandascore.dto.PandaScoreMatch;
-import com.example.demo.services.pandascore.dto.PandaScoreOpponent;
-import com.example.demo.services.pandascore.dto.PandaScorePlayer;
-import com.example.demo.services.pandascore.dto.PandaScoreTeam;
+import com.example.demo.services.pandascore.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -263,6 +260,9 @@ public class PandaScoreSyncService {
             gameRepository.save(game);
             logger.info("Created new match: {} vs {} (PandaScore ID: {})",
                     team1.getName(), team2.getName(), pandaMatch.getId());
+
+            // Try to fetch and store odds (will silently fail if not available)
+            syncOddsForMatch(game, pandaMatch.getId());
 
             return true;
         } catch (Exception e) {
@@ -536,5 +536,41 @@ public class PandaScoreSyncService {
 
         // Default: try to extract acronym or return null
         return null;
+    }
+
+    /**
+     * Sync betting odds for a match
+     * Note: This will silently fail if odds API is not available (requires premium subscription)
+     */
+    private void syncOddsForMatch(Game game, Long pandaScoreMatchId) {
+        try {
+            List<PandaScoreOdds> oddsList = pandaScoreApiService.getMatchOdds(pandaScoreMatchId);
+
+            if (oddsList == null || oddsList.isEmpty()) {
+                return;  // No odds available, silently continue
+            }
+
+            // Find the "match_winner" market odds
+            for (PandaScoreOdds odds : oddsList) {
+                if ("match_winner".equalsIgnoreCase(odds.getMarketName()) && odds.getOptions() != null && odds.getOptions().size() >= 2) {
+                    // Extract odds for both teams
+                    PandaScoreOddsOption team1Odds = odds.getOptions().get(0);
+                    PandaScoreOddsOption team2Odds = odds.getOptions().get(1);
+
+                    game.setTeamOneOdds(team1Odds.getOdd());
+                    game.setTeamTwoOdds(team2Odds.getOdd());
+                    if (odds.getUpdatedAt() != null) {
+                        game.setOddsLastUpdated(odds.getUpdatedAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    }
+
+                    gameRepository.save(game);
+                    logger.info("Updated odds for match {}: Team1={}, Team2={}",
+                            game.getId(), game.getTeamOneOdds(), game.getTeamTwoOdds());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            logger.debug("Could not fetch odds for match {} (likely not available with current subscription)", pandaScoreMatchId);
+        }
     }
 }

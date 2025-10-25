@@ -22,6 +22,8 @@ public class CornJobs {
     UserRepository userRepository;
     @Autowired
     PandaScoreSyncService pandaScoreSyncService;
+    @Autowired
+    OddsScraperService oddsScraperService;
 
     @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void checkInactiveUsers() {
@@ -44,6 +46,21 @@ public class CornJobs {
             logger.info("Scheduled sync completed: {} matches synced", synced);
         } catch (Exception e) {
             logger.error("Error during scheduled match sync", e);
+        }
+    }
+
+    /**
+     * Scrape and update odds from OddsPortal
+     * Runs every 4 hours
+     */
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 4)  // Every 4 hours
+    public void scrapeOdds() {
+        logger.info("Starting scheduled odds scraping from OddsPortal");
+        try {
+            int updated = oddsScraperService.scrapeAndUpdateOdds();
+            logger.info("Scheduled odds scraping completed: {} matches updated", updated);
+        } catch (Exception e) {
+            logger.error("Error during scheduled odds scraping", e);
         }
     }
 

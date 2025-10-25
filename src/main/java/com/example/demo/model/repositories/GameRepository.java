@@ -28,4 +28,8 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     // Find game by PandaScore match ID
     Game findByPandascoreMatchId(Long pandascoreMatchId);
+
+    // Find upcoming games between two specific teams
+    @Query("SELECT g FROM Game g WHERE ((g.teamOneId = :team1Id AND g.teamTwoId = :team2Id) OR (g.teamOneId = :team2Id AND g.teamTwoId = :team1Id)) AND g.isFinished = false ORDER BY g.matchStartDateTime ASC")
+    List<Game> findUpcomingGamesByTeams(@Param("team1Id") int team1Id, @Param("team2Id") int team2Id);
 }

@@ -53,4 +53,14 @@ public class Game {
     @Column(name = "serie_name")
     private String serieName;  // Serie/season name from PandaScore
 
+    // Betting odds fields (from PandaScore odds API)
+    @Column(name = "team_one_odds")
+    private Double teamOneOdds;  // Decimal odds for team one (e.g., 1.75)
+
+    @Column(name = "team_two_odds")
+    private Double teamTwoOdds;  // Decimal odds for team two (e.g., 2.10)
+
+    @Column(name = "odds_last_updated")
+    private String oddsLastUpdated;  // Timestamp when odds were last updated
+
 }
