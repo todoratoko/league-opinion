@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -7,9 +8,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class CorsConfig {
+
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @Bean
     public CorsFilter corsFilter() {
@@ -18,12 +24,17 @@ public class CorsConfig {
         // Allow credentials (cookies, authorization headers)
         config.setAllowCredentials(true);
 
-        // Allow these origins - UPDATE THESE WITH YOUR FRONTEND URLS
-        config.setAllowedOrigins(Arrays.asList(
-            "http://localhost:3000",      // Local React development
-            "http://localhost:5173",      // Local Vite development
-            "https://your-frontend.vercel.app"  // Replace with your Vercel URL
-        ));
+        // Build allowed origins list dynamically
+        List<String> allowedOrigins = new ArrayList<>();
+        allowedOrigins.add("http://localhost:3000");  // Local React development
+        allowedOrigins.add("http://localhost:5173");  // Local Vite development
+
+        // Add production frontend URL from environment variable
+        if (frontendUrl != null && !frontendUrl.startsWith("http://localhost")) {
+            allowedOrigins.add(frontendUrl);
+        }
+
+        config.setAllowedOrigins(allowedOrigins);
 
         // Allow these HTTP methods
         config.setAllowedMethods(Arrays.asList(
