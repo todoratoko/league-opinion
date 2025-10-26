@@ -157,7 +157,14 @@ public class UserService {
         }
     }
 
-    public UserProfileDTO getUserProfile(long id, HttpServletRequest request) {
+    public UserProfileDTO getUserProfile(long id, HttpServletRequest request, HttpServletResponse response) {
+        // Authenticate JWT token if present and populate session
+        try {
+            checkAndRenewToken(request, response);
+        } catch (UnauthorizedException e) {
+            // JWT not provided or invalid - continue as anonymous user
+        }
+
         User user = getUserById(id);
 
         UserProfileDTO dto = new UserProfileDTO();
@@ -472,12 +479,12 @@ public class UserService {
 
     // ========== USERNAME-BASED METHODS (Pretty URLs) ==========
 
-    public UserProfileDTO getUserProfileByUsername(String username, HttpServletRequest request) {
+    public UserProfileDTO getUserProfileByUsername(String username, HttpServletRequest request, HttpServletResponse response) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new NotFoundException("User not found with username: " + username);
         }
-        return getUserProfile(user.getId(), request);
+        return getUserProfile(user.getId(), request, response);
     }
 
     public List<?> getUserOpinionsByUsername(String username) {

@@ -56,8 +56,8 @@ public class UserController extends BaseController {
 
     // GET /users/{id}/profile - Get user profile with statistics
     @GetMapping("/users/{id}/profile")
-    public ResponseEntity<UserProfileDTO> getUserProfile(@PathVariable long id, HttpServletRequest request) {
-        return ResponseEntity.ok(userService.getUserProfile(id, request));
+    public ResponseEntity<UserProfileDTO> getUserProfile(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok(userService.getUserProfile(id, request, response));
     }
 
     // PUT /users/{id}/portfolio - Update user portfolio settings
@@ -141,8 +141,8 @@ public class UserController extends BaseController {
 
     // GET /users/username/{username}/profile - Get user profile by username (pretty URL)
     @GetMapping("/users/username/{username}/profile")
-    public ResponseEntity<UserProfileDTO> getUserProfileByUsername(@PathVariable String username, HttpServletRequest request) {
-        return ResponseEntity.ok(userService.getUserProfileByUsername(username, request));
+    public ResponseEntity<UserProfileDTO> getUserProfileByUsername(@PathVariable String username, HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok(userService.getUserProfileByUsername(username, request, response));
     }
 
     // GET /users/username/{username}/opinions - Get user opinions by username (pretty URL)
