@@ -206,8 +206,7 @@ public class UserService {
      */
     public User updatePortfolioSettings(Long userId, Double portfolioSize, Double minEdge, Double minWin,
                                        HttpServletRequest request, HttpServletResponse response) {
-        // Validate authentication
-        validateLogin(request);
+        // Validate authentication via JWT token
         checkAndRenewToken(request, response);
 
         // Verify the logged-in user is updating their own portfolio
@@ -448,6 +447,15 @@ public class UserService {
         String token = extractTokenFromRequest(request);
         String newToken = jwtService.isTokenValidAndRenew(token);
         if (newToken != null) {
+            // Extract username from JWT and populate session attributes
+            String username = jwtService.extractUsername(token);
+            User user = userRepository.findByUsername(username);
+            if (user != null) {
+                // Populate session attributes for backward compatibility with session-based auth
+                request.getSession().setAttribute(LOGGED, true);
+                request.getSession().setAttribute(USER_ID, user.getId());
+                request.getSession().setAttribute(LOGGED_FROM, request.getRemoteAddr());
+            }
             response.setHeader("Authorization", "Bearer " + newToken);
         } else {
             throw new UnauthorizedException("Invalid or expired token");
