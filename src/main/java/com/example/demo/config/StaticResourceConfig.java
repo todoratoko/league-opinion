@@ -20,19 +20,10 @@ public class StaticResourceConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:uploads/")
                 .setCachePeriod(3600); // Cache for 1 hour
 
-        // Serve team logos and player photos from static/images
+        // Serve all static images (teams, players, leagues, tournaments) from classpath
+        // This ensures images are bundled in JAR and available in production
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/")
-                .setCachePeriod(86400); // Cache for 24 hours
-
-        // Serve league logos from uploads directory
-        registry.addResourceHandler("/images/leagues/**")
-                .addResourceLocations("file:uploads/images/leagues/")
-                .setCachePeriod(86400); // Cache for 24 hours
-
-        // Serve tournament logos
-        registry.addResourceHandler("/images/tournaments/**")
-                .addResourceLocations("classpath:/static/images/tournaments/")
                 .setCachePeriod(86400); // Cache for 24 hours
     }
 
