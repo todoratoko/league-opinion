@@ -15,6 +15,63 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
+# Team name normalization map (OddsPortal name -> Database name/tag)
+TEAM_NAME_MAP = {
+    "Top Esports": "TES",
+    "Bilibili Gaming": "BLG",
+    "FlyQuest": "FLY",
+    "Gen.G Esports": "GEN",
+    "Gen.G": "GEN",
+    "GEN": "GEN",
+    "GENG": "GEN",
+    "Hanwha Life": "HLE",
+    "Hanwha Life Esports": "HLE",
+    "HLE": "HLE",
+    "LNG Esports": "LNG",
+    "Weibo Gaming": "WBG",
+    "MAD Lions KOI": "MDK",
+    "KOI": "KOI",
+    "Movistar KOI": "KOI",
+    "Vikings Esports": "VKE",
+    "Keyd Stars": "VKS",
+    "PSG Talon": "PSG",
+    "paiN Gaming": "PNG",
+    "Rainbow7": "R7",
+    "GAM Esports": "GAM",
+    "100 Thieves": "100",
+    "100T": "100",
+    "SoftBank HAWKS": "SHG",
+    "Cloud9": "C9",
+    "Fnatic": "FNC",
+    "G2 Esports": "G2",
+    "G2": "G2",
+    "T1": "T1",
+    "SK Telecom T1": "T1",
+    "Team Liquid": "TL",
+    "TL": "TL",
+    "Team SoloMid": "TSM",
+    "TSM": "TSM",
+    "CTBC Flying Oyster": "CFO",
+    "Secret Whales": "TSW",
+    "Anyone's Legend": "AL",
+    "KT Rolster": "KT",
+    "KT": "KT",
+}
+
+def normalize_team_name(team_name):
+    """Normalize team name to match database names"""
+    # First try direct mapping
+    if team_name in TEAM_NAME_MAP:
+        return TEAM_NAME_MAP[team_name]
+
+    # Try case-insensitive matching
+    for key, value in TEAM_NAME_MAP.items():
+        if key.lower() == team_name.lower():
+            return value
+
+    # Return original name if no mapping found
+    return team_name
+
 def setup_driver():
     """Setup Chrome driver with headless options"""
     chrome_options = Options()
@@ -80,9 +137,13 @@ def scrape_lol_odds():
                                 date_elem = match_elem.find_elements(By.CSS_SELECTOR, ".date, .time, [class*='date']")
                                 match_date = date_elem[0].text.strip() if date_elem else "Unknown"
 
+                                # Normalize team names to match database
+                                normalized_team1 = normalize_team_name(team1_name)
+                                normalized_team2 = normalize_team_name(team2_name)
+
                                 matches.append({
-                                    "team1": team1_name,
-                                    "team2": team2_name,
+                                    "team1": normalized_team1,
+                                    "team2": normalized_team2,
                                     "team1Odds": team1_odds,
                                     "team2Odds": team2_odds,
                                     "date": match_date,
@@ -90,7 +151,7 @@ def scrape_lol_odds():
                                     "scrapedAt": datetime.now().isoformat()
                                 })
 
-                                print(f"Scraped: {team1_name} vs {team2_name} - {team1_odds}/{team2_odds}", file=sys.stderr)
+                                print(f"Scraped: {team1_name} ({normalized_team1}) vs {team2_name} ({normalized_team2}) - {team1_odds}/{team2_odds}", file=sys.stderr)
 
                             except (ValueError, IndexError) as e:
                                 print(f"Error parsing odds: {e}", file=sys.stderr)

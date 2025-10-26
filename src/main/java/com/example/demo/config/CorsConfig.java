@@ -34,7 +34,11 @@ public class CorsConfig {
             allowedOrigins.add(frontendUrl);
         }
 
-        config.setAllowedOrigins(allowedOrigins);
+        // Also allow all Vercel preview deployments
+        config.setAllowedOriginPatterns(Arrays.asList(
+            "http://localhost:*",
+            "https://*.vercel.app"
+        ));
 
         // Allow these HTTP methods
         config.setAllowedMethods(Arrays.asList(
